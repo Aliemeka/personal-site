@@ -1,0 +1,24 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../config";
+---
+
+<!DOCTYPE html>
+<html lang='en'>
+  <head>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+  </head>
+  <body
+    class='bg-gradient-to-r from-black to-gray-800 h-screen overflow-y-scroll'
+  >
+    <Header title={SITE_TITLE} />
+    <main
+      class='h-screen flex flex-col bg-gradient-to-br from-slate-900 via-black to-gray-800 relative z-30'
+    >
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>
