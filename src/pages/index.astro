@@ -4,6 +4,7 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../config";
 import MainLayout from "../layouts/MainLayout.astro";
+import Image from "../components/Image.astro";
 ---
 
 <MainLayout>
@@ -22,6 +23,6 @@ import MainLayout from "../layouts/MainLayout.astro";
   <section
     class='w-full flex justify-end pr-8 md:pr-20 flex-1 items-end border-b border-collapse border-white md:border-none'
   >
-    <img src='/Emeka.png' alt='Me' class='md:w-[600px] lg:w-[650px]' />
+    <Image src='Emeka.png' alt='Me' class='md:w-[600px] lg:w-[650px]' />
   </section>
 </MainLayout>
