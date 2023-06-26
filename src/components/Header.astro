@@ -3,7 +3,14 @@ import HeaderLink from "./HeaderLink.astro";
 ---
 
 <header class='fixed w-full z-40'>
-  <nav class='flex bg-transparent py-4 px-8 md:py-6 md:px-20 text-slate-200'>
+  <nav
+    class='flex bg-transparent py-4 px-8 md:py-6 md:px-20 text-slate-200 gap-x-4 filter backdrop-blur-md'
+  >
     <HeaderLink href='/'>Hi! I'm Emeka 👋🏽</HeaderLink>
+    <ul class='flex gap-x-4 items-center divide-x divide-slate-50'>
+      <li>
+        <HeaderLink href='/blog'>Blog</HeaderLink>
+      </li>
+    </ul>
   </nav>
 </header>
