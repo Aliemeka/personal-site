@@ -6,14 +6,14 @@ const allPosts = await Astro.glob("./*.md");
 
 <MainLayout>
   <header
-    class='px-6 sm:px-8 pt-20 sm:pt-24 md:px-20 relative z-30 max-w-screen-lg'
+    class='px-6 sm:px-8 pt-20 sm:pt-24 md:px-20 relative z-30 max-w-screen-lg md:mx-auto'
   >
     <h1 class='text-slate-200 text-4xl md:text-5xl text-left font-medium'>
       Emeka's Log
     </h1>
   </header>
   <section
-    class='flex flex-col col-span-12 py-4 px-6 sm:px-8 md:px-20 divide-y lg:col-span-6 divide-gray-400/40'
+    class='flex flex-col col-span-12 py-4 px-6 sm:px-8 md:px-20 divide-y lg:col-span-6 divide-gray-400/40 mx-auto justify-center max-w-screen-lg'
   >
     {
       allPosts.map((post) => (

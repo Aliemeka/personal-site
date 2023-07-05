@@ -2,7 +2,7 @@
 layout: ../../layouts/BlogPost.astro
 title: "Do Hard Things"
 pubDate: 2023-06-26
-description: "It is actually okay to write comments in your code or can you do absolutely without them?"
+description: "As techies, especially programmers, we often find ourselves facing numerous challenges on a daily basis, from debugging complex code to tackling unfamiliar technologies. However, instead of shying away from these challenges, we should embrace them wholeheartedly."
 author: "Emeka Allison"
 image:
   url: "https://astro.build/assets/blog/astro-1-release-update/cover.jpeg"
