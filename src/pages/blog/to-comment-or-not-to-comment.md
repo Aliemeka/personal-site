@@ -5,8 +5,8 @@ pubDate: 2023-06-26
 description: "It is actually okay to write comments in your code or can you do absolutely without them?"
 author: "Emeka Allison"
 image:
-  url: "https://astro.build/assets/blog/astro-1-release-update/cover.jpeg"
-  alt: "The Astro logo with the word One."
+  url: "https://res.cloudinary.com/emekadinary/image/upload/q_55/v1695882991/emeka's%20blog/To_comment_or_not_to_comment_g9w7uv.webp"
+  alt: "To comment or not to comment"
 tags: ["astro", "blogging", "learning in public"]
 ---
 

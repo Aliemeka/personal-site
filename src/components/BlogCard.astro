@@ -1,16 +1,25 @@
 ---
 import { convertDate } from "../utils";
+import Image from "./Image.astro";
 
 interface Props {
   date: string;
   title: string;
   description: string;
-  image?: string;
+  image: {
+    url: string;
+    alt: string;
+  };
   url: string;
 }
 ---
 
 <article class='pt-6 pb-4 space-y-2 max-w-screen-lg'>
+  <Image
+    src={Astro.props.image.url}
+    class='w-full h-auto bg-white mb-4 rounded-lg'
+    alt={Astro.props.image.alt}
+  />
   <span class='text-slate-400'>{convertDate(Astro.props.date)}</span>
   <h1 class='text-3xl font-bold text-slate-200 w-4/5'>
     {Astro.props.title}
