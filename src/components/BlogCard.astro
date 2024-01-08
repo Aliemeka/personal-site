@@ -17,13 +17,15 @@ interface Props {
 <article class='pt-6 pb-4 space-y-2 max-w-screen-lg'>
   <Image
     src={Astro.props.image.url}
-    class='w-full h-auto bg-white mb-4 rounded-lg'
+    class='w-full h-auto bg-white mb-4 rounded-lg aspect-[4/3'
     alt={Astro.props.image.alt}
   />
   <span class='text-slate-400'>{convertDate(Astro.props.date)}</span>
-  <h1 class='text-3xl font-bold text-slate-200 w-4/5'>
-    {Astro.props.title}
-  </h1>
+  <a href={Astro.props.url}>
+    <h1 class='text-3xl font-bold text-slate-200 w-4/5'>
+      {Astro.props.title}
+    </h1>
+  </a>
   <p class='text-slate-300 w-5/6'>
     {Astro.props.description}
   </p>
