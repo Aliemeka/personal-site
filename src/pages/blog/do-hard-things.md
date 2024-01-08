@@ -5,9 +5,9 @@ pubDate: 2023-06-26
 description: "As techies, especially programmers, we often find ourselves facing numerous challenges on a daily basis, from debugging complex code to tackling unfamiliar technologies. However, instead of shying away from these challenges, we should embrace them wholeheartedly."
 author: "Emeka Allison"
 image:
-  url: "https://astro.build/assets/blog/astro-1-release-update/cover.jpeg"
-  alt: "The Astro logo with the word One."
-tags: ["astro", "blogging", "learning in public"]
+  url: "https://res.cloudinary.com/emekadinary/image/upload/v1704735010/emeka%27s%20blog/do_hard_things_su825w.png"
+  alt: "Do Hard Things"
+tags: ["building", "learning", "productivity", "growth"]
 ---
 
 As techies, especially programmers, we often find ourselves facing numerous challenges on a daily basis. Whether it's debugging complex code, tackling unfamiliar technologies, or managing tight deadlines, the path of a programmer is paved with difficult tasks. However, instead of shying away from these challenges, we should embrace them wholeheartedly. In this article, we will explore the significance of doing hard things in programming and the benefits it brings to our professional growth.
@@ -46,6 +46,4 @@ When we tackle difficult projects or learn unfamiliar technologies, we become ad
 
 As techies, we should actively seek out hard tasks and embrace them as opportunities for growth. By stepping out of our comfort zones, overcoming imposter syndrome, and cultivating problem-solving skills, we can become better programmers. Failure becomes a stepping stone to success, and resilience and adaptability become our second nature.
 
-Remember, doing hard things is not just about accomplishing a specific task; it's about pushing our
-
-limits, expanding our horizons, and becoming the best versions of ourselves as programmers. So, next time you come across a challenging project, don't shy away from it—embrace it with open arms and witness the transformative power of doing hard things.
+Remember, doing hard things is not just about accomplishing a specific task; it's about pushing our limits, expanding our horizons, and becoming the best versions of ourselves as programmers. So, next time you come across a challenging project, don't shy away from it—embrace it with open arms and witness the transformative power of doing hard things.
