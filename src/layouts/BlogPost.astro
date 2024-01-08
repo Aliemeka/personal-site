@@ -16,13 +16,13 @@ export interface Props {
 }
 
 const {
-  content: { title, description, pubDate, updatedDate, heroImage },
+  content: { title, description, pubDate, updatedDate, image },
 } = Astro.props;
 ---
 
 <html lang='en'>
   <head>
-    <BaseHead title={title} description={description} />
+    <BaseHead title={`${title} | ${SITE_TITLE}`} description={description} />
     <style>
       .title {
         font-size: 2em;
@@ -46,7 +46,16 @@ const {
       <article
         class='max-w-screen-md px-5 text-slate-300 mx-auto pt-16 sm:pt-24 md:px-10 md:pb-10'
       >
-        {heroImage && <img width={720} height={360} src={heroImage} alt='' />}
+        <ul class='gap-x-2 flex text-sm'>
+          <li>
+            <a
+              href='/blog'
+              class='text-slate-500 hover:text-slate-200 hover:underline hover:underline-offset-2'
+              >Blog</a
+            >
+          </li>/
+          <li><a>{title}</a></li>
+        </ul>
         <h1
           class='text-4xl md:text-5xl max-w-2xl font-bold mb-4 text-slate-200'
         >
@@ -55,6 +64,11 @@ const {
         <div class='mb-8'>
           <time class='text-slate-400'>{convertDate(pubDate)}</time>
           <hr class='border-gray-400/40' />
+          {
+            image.url ? (
+              <img width={720} height={360} src={image.url} alt='' />
+            ) : null
+          }
         </div>
         {
           updatedDate && (
