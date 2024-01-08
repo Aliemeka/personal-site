@@ -5,7 +5,7 @@ pubDate: 2023-06-26
 description: "As techies, especially programmers, we often find ourselves facing numerous challenges on a daily basis, from debugging complex code to tackling unfamiliar technologies. However, instead of shying away from these challenges, we should embrace them wholeheartedly."
 author: "Emeka Allison"
 image:
-  url: "https://res.cloudinary.com/emekadinary/image/upload/v1704735010/emeka%27s%20blog/do_hard_things_su825w.png"
+  url: "https://res.cloudinary.com/emekadinary/image/upload//q_55/v1704735010/emeka%27s%20blog/do_hard_things_su825w.png"
   alt: "Do Hard Things"
 tags: ["building", "learning", "productivity", "growth"]
 ---
