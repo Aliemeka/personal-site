@@ -49,3 +49,13 @@ blockquote {
   margin: 0px;
   font-style: italic;
 }
+
+.blog-page img {
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.blog-page small {
+  color: #aaa;
+}
