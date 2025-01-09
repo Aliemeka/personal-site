@@ -50,6 +50,16 @@ blockquote {
   font-style: italic;
 }
 
+.blog-page h1,
+.blog-page h2,
+.blog-page h3,
+.blog-page h4,
+.blog-page h5,
+.blog-page h6 {
+  color: rgb(226 232 240);
+  font-weight: 800;
+}
+
 .blog-page img {
   display: block;
   margin-right: auto;
@@ -58,4 +68,10 @@ blockquote {
 
 .blog-page small {
   color: #aaa;
+}
+
+.blog-page p > a {
+  color: #94a3b8;
+  text-underline-offset: 2px;
+  text-decoration: underline;
 }
