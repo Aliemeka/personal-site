@@ -5,7 +5,7 @@ pubDate: 2024-12-27
 description: "Thanking God for something that hasn't happened yet may seen absurd but it's actually a precursor that helps you navigate a New Year."
 author: "Emeka Allison"
 image:
-  url: "https://res.cloudinary.com/emekadinary/image/upload/v1736421011/emeka%27s%20blog/thank-god-for-2025_igcnc6.png"
+  url: "https://res.cloudinary.com/emekadinary/image/upload/q_52/v1736421011/emeka's%20blog/thank-god-for-2025_igcnc6.png"
   alt: "Thankful"
 tags: ["building", "learning", "productivity", "growth"]
 ---
