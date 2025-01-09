@@ -83,30 +83,45 @@ blockquote {
   color: #aaa;
 }
 
-.blog-page p > a {
+.inner-blog p > a {
   color: #94a3b8;
   text-underline-offset: 2px;
   text-decoration: underline;
 }
-.blog-page p > a:hover,
-.blog-page p > a:active {
+.inner-blog p > a:hover,
+.inner-blog p > a:active {
   color: #60a5fa;
 }
 
-.blog-page p > a:visited {
+.inner-blog p > a:visited {
   color: #976ff3;
 }
 
-.blog-page ol {
+.inner-blog ol {
   list-style-type: decimal;
   padding-left: 1rem;
 }
 
-.blog-page pre {
+.inner-blog ul {
+  list-style-type: disc;
+  padding-left: 1rem;
+}
+
+.inner-blog li > a {
+  color: #94a3b8;
+  text-underline-offset: 2px;
+  text-decoration: underline;
+}
+
+.inner-blog li > a:hover {
+  color: #60a5fa;
+}
+
+.inner-blog pre {
   font-size: 0.8rem;
 }
 
-.blog-page p > code {
+.inner-blog p > code {
   color: rgb(234, 166, 8);
   font-size: 0.9rem;
 }
