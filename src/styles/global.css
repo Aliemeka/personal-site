@@ -27,6 +27,19 @@ h2 {
   font-weight: 600;
   color: rgb(226 232 240);
 }
+h3 {
+  margin: 1.5rem 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: rgb(226 232 240);
+}
+
+h4 {
+  margin: 1.2rem 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: rgb(226 232 240);
+}
 
 p {
   margin-bottom: 1rem;
@@ -82,4 +95,18 @@ blockquote {
 
 .blog-page p > a:visited {
   color: #976ff3;
+}
+
+.blog-page ol {
+  list-style-type: decimal;
+  padding-left: 1rem;
+}
+
+.blog-page pre {
+  font-size: 0.8rem;
+}
+
+.blog-page p > code {
+  color: rgb(234, 166, 8);
+  font-size: 0.9rem;
 }
