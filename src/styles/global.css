@@ -75,3 +75,11 @@ blockquote {
   text-underline-offset: 2px;
   text-decoration: underline;
 }
+.blog-page p > a:hover,
+.blog-page p > a:active {
+  color: #60a5fa;
+}
+
+.blog-page p > a:visited {
+  color: #976ff3;
+}
