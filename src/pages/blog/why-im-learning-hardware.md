@@ -5,7 +5,7 @@ pubDate: 2025-01-11
 description: "As a software developer, I've always been fascinated by how things work under the hood so, I decided to dive deeper into hardware to expand my knowledge and skills."
 author: "Emeka Allison"
 image:
-  url: "https://res.cloudinary.com/emekadinary/image/upload/q_50/v1736425231/emeka's%20blog/learning-hardware-2025_rhafma.png"
+  url: "https://res.cloudinary.com/emekadinary/image/upload/q_45/v1736425231/emeka's%20blog/learning-hardware-2025_rhafma.png"
   alt: "Do Hard Things"
 tags: ["hardware", "learning", "technology", "development"]
 ---
