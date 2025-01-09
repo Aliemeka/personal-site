@@ -23,16 +23,11 @@ const {
 
 <html lang='en'>
   <head>
-    <BaseHead title={`${title} | ${SITE_TITLE}`} description={description} />
-    <meta property='og:title' content={title} />
-    <meta property='og:description' content={description} />
-    <meta property='og:image' content={image?.url} />
-    <meta property='og:type' content='article' />
-    <meta property='article:author' content={author} />
-    <meta name='twitter:card' content='summary_large_image' />
-    <meta name='twitter:title' content={title} />
-    <meta name='twitter:description' content={description} />
-    <meta name='twitter:image' content={image?.url} />
+    <BaseHead
+      title={`${title} | ${SITE_TITLE}`}
+      description={description}
+      image={image?.url}
+    />
     <style>
       .title {
         font-size: 2em;
