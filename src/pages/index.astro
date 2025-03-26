@@ -6,55 +6,57 @@ import Projects from "../components/Projects.astro";
 ---
 
 <MainLayout>
-  <div
-    class='grid place-items-center absolute inset-0 z-0 md:overflow-hidden opacity-25 filter bg-blend-overlay blur-[1px] scale-50 md:scale-75 hue-rotate-60'
-  >
-    <AsciiMe />
-  </div>
-  <header
-    class='px-6 sm:px-8 pt-20 sm:pt-24 lg:pt-32 md:px-20 md:pt-42 relative z-30'
-  >
-    <h1
-      class='text-slate-200 text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-[115px] text-left max-w-screen-xl'
+  <section class="md:h-svh relative">
+    <div
+      class='grid place-items-center absolute inset-0 z-0 md:overflow-hidden opacity-25 filter bg-blend-overlay blur-[1px] scale-50 md:scale-75 hue-rotate-60'
     >
-      Builder, Teacher, Instructor and Creator.
-    </h1>
-    <p class='md:w-3/5 lg:w-1/3 text-slate-300 mt-4 lg:text-lg'>
-      I'm a software engineer and product developer from Nigeria 🇳🇬. I work with <a
-        href='https://www.onboard.xyz'
-        target='_blank'
-        class='text-slate-400 underline hover:text-indigo-500/75 hover:underline underline-offset-2 duration-200'
-        >Onboard Global</a
-      >⛓ and I'm building <a
-        href='https://domeinitiative.com'
-        target='_blank'
-        class='text-slate-400 underline hover:text-rose-500/75 hover:underline underline-offset-2 duration-200'
-        >Dome Academy</a
-      >🎓 and <a
-        href='https://spit.sh'
-        target='_blank'
-        class='text-slate-400 underline hover:text-fuchsia-500/75 hover:underline underline-offset-2 duration-200'
-        >Spit.sh</a
-      >🧙🏼‍♂️ in public.
-    </p>
-    <div class='flex mt-6'>
-      <a
-        href='mailto:emekaallison4@gmail.com'
-        class='text-slate-500 hover:text-slate-200 hover:underline underline-offset-2 duration-200'
-        >Get in touch</a
-      >
+      <AsciiMe />
     </div>
-  </header>
-  <section
-    class='w-full flex justify-end pr-8 flex-1 items-end border-b border-collapse border-white md:border-none z-20 md:absolute md:bottom-0 md:right-0'
-  >
-    <Image
-      src='Emeka.png'
-      alt='Me'
-      class='md:[w-1/3] lg:w-[1/2] aspect-square'
-    />
+    <header
+      class='px-6 sm:px-8 pt-20 sm:pt-24 lg:pt-32 md:px-20 md:pt-42 relative z-30'
+    >
+      <h1
+        class='text-slate-200 text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-[115px] text-left max-w-screen-xl'
+      >
+        Builder, Teacher, Instructor and Creator.
+      </h1>
+      <p class='md:w-3/5 lg:w-1/3 text-slate-300 mt-4 lg:text-lg'>
+        I'm a software engineer and product developer from Nigeria 🇳🇬. I work with <a
+          href='https://www.onboard.xyz'
+          target='_blank'
+          class='text-slate-400 underline hover:text-indigo-500/75 hover:underline underline-offset-2 duration-200'
+          >Onboard Global</a
+        >⛓ and I'm building <a
+          href='https://domeinitiative.com'
+          target='_blank'
+          class='text-slate-400 underline hover:text-rose-500/75 hover:underline underline-offset-2 duration-200'
+          >Dome Academy</a
+        >🎓 and <a
+          href='https://spit.sh'
+          target='_blank'
+          class='text-slate-400 underline hover:text-fuchsia-500/75 hover:underline underline-offset-2 duration-200'
+          >Spit.sh</a
+        >🧙🏼‍♂️ in public.
+      </p>
+      <div class='flex mt-6'>
+        <a
+          href='mailto:emekaallison4@gmail.com'
+          class='text-slate-500 hover:text-slate-200 hover:underline underline-offset-2 duration-200'
+          >Get in touch</a
+        >
+      </div>
+    </header>
+    <section
+      class='w-full flex justify-end pr-8 flex-1 items-end border-b border-collapse border-white md:border-none z-20 md:absolute md:bottom-0 md:right-0'
+    >
+      <Image
+        src='Emeka.png'
+        alt='Me'
+        class='md:[w-1/3] lg:w-[1/2] aspect-square'
+      />
+    </section>
   </section>
   
+  <Projects />
 </MainLayout>
 <!-- Projects Section -->
-<Projects />

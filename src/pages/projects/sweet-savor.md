@@ -3,7 +3,7 @@ layout: ../../layouts/Project.astro
 title: "Sweet Savor"
 description: "A food delivery service platform offering delicious meals at your convenience with a seamless ordering process."
 image:
-  url: "/sweet-savor.png"
+  url: "https://res.cloudinary.com/emekadinary/image/upload/q_60/v1742965580/Projects%20Screenshot/sweet-savor_pse9r2.webp"
   alt: "Sweet Savor Website Screenshot"
 pubDate: "2024-12-05"
 author: "Emeka Allison"
