@@ -3,7 +3,7 @@ layout: ../../layouts/Project.astro
 title: "Spit.sh"
 description: "A URL shortener with extra features including real-time analytics, custom domains, and QR code generation to enhance your online marketing efforts."
 image:
-  url: "/spit-sh.png"
+  url: "https://res.cloudinary.com/emekadinary/image/upload/q_60/v1742965824/Projects%20Screenshot/spit-sh_xttlxw.webp"
   alt: "Spit.sh Screenshot"
 pubDate: "2025-02-15"
 author: "Emeka Allison"
@@ -33,9 +33,9 @@ Spit.sh is built with a modern, robust tech stack:
 
 - **TypeScript**: For type-safe code and improved developer experience
 - **Next.js**: For server-side rendering and optimized performance
-- **Prisma**: For database management
-- **Vercel**: For deployment and serverless functions
+- **FastAPI**: For database management
 - **TailwindCSS**: For responsive design and consistent styling
+- **SQLModel**:
 
 ## Open Source
 

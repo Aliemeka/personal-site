@@ -3,16 +3,18 @@ layout: ../../layouts/Project.astro
 title: "Dome Academy"
 description: "A community-focused educational platform for developers, offering hands-on project-based learning and professional development resources."
 image:
-  url: "/dome-academy.png"
+  url: "https://res.cloudinary.com/emekadinary/image/upload/q_60/v1742965580/Projects%20Screenshot/dome_we7dlj.webp"
   alt: "Dome Academy Screenshot"
 pubDate: "2025-03-01"
 author: "Emeka Allison"
-tags: ["React", "Next.js", "Tailwind CSS"]
+tags: ["Next.js", "Supabase", "FastAPI", "PostgreSQL", "AWS"]
 ---
 
 # Dome Academy
 
-Dome Academy is a community-focused educational platform designed to help developers enhance their skills through hands-on project-based learning.
+Dome Academy is a community-driven learning platform that offers various tech courses fostering collaboration between learners and allowing them to showcase their skills and achievements to enhance career prospects.
+
+Dome Academy is a community-driven tech learning platform offering accessible courses, mentorship, and networking opportunities to develop skills and foster problem-solving.
 
 ## The Problem
 
@@ -27,15 +29,30 @@ Dome Academy bridges this gap by offering:
 - Professional development resources for career advancement
 - Practical exercises that mirror real-world scenarios
 
+## Areas we cover
+
+- Software engineering
+- Graphic design
+- Product design
+- Data Science
+- 3D Animation
+- Technical Writing
+- Cloud
+- Game development
+- Augmented reality
+- Blockchain
+- Internet of things
+- Sustainable tech
+
 ## Technologies Used
 
 The platform is built using a modern tech stack:
 
-- **React**: For building a responsive and interactive user interface
-- **Next.js**: For server-side rendering, routing, and optimized performance
-- **Tailwind CSS**: For streamlined styling and consistent design
-- **Firebase**: For authentication and database management
-- **Vercel**: For deployment and hosting
+- **Next.js**: For building a responsive and interactive front-end with server-side rendering capabilities
+- **Supabase**: For authentication, real-time subscriptions, and database access
+- **FastAPI**: For building high-performance API endpoints to support the application
+- **PostgreSQL**: For robust and scalable database management
+- **AWS**: For cloud infrastructure, deployment, and hosting
 
 ## Lessons Learned
 
