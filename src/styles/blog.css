@@ -1,0 +1,119 @@
+@import "tailwindcss";
+
+body {
+  font-family: Epilogue, sans-serif;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  line-height: 1.5;
+  color: #444;
+}
+
+h1 {
+  margin: 1rem 0;
+  font-size: 2.5rem;
+}
+
+h2 {
+  margin: 1.5rem 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: rgb(226 232 240);
+}
+h3 {
+  margin: 1.5rem 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: rgb(226 232 240);
+}
+
+h4 {
+  margin: 1.2rem 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: rgb(226 232 240);
+}
+
+p {
+  margin-bottom: 1rem;
+}
+
+code {
+  padding: 2px 5px;
+  background-color: #222;
+}
+pre {
+  padding: 1rem;
+}
+pre > code {
+  all: unset;
+}
+blockquote {
+  border: 1px solid #999;
+  color: #222;
+  padding: 2px 0px 2px 20px;
+  margin: 0px;
+  font-style: italic;
+}
+
+.blog-page h1,
+.blog-page h2,
+.blog-page h3,
+.blog-page h4,
+.blog-page h5,
+.blog-page h6 {
+  color: rgb(226 232 240);
+  font-weight: 800;
+}
+
+.blog-page img {
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.blog-page small {
+  color: #aaa;
+}
+
+.inner-blog p > a {
+  color: #94a3b8;
+  text-underline-offset: 2px;
+  text-decoration: underline;
+}
+.inner-blog p > a:hover,
+.inner-blog p > a:active {
+  color: #60a5fa;
+}
+
+.inner-blog p > a:visited {
+  color: #976ff3;
+}
+
+.inner-blog ol {
+  list-style-type: decimal;
+  padding-left: 1rem;
+}
+
+.inner-blog ul {
+  list-style-type: disc;
+  padding-left: 1rem;
+}
+
+.inner-blog li > a {
+  color: #94a3b8;
+  text-underline-offset: 2px;
+  text-decoration: underline;
+}
+
+.inner-blog li > a:hover {
+  color: #60a5fa;
+}
+
+.inner-blog pre {
+  font-size: 0.8rem;
+}
+
+.inner-blog p > code {
+  color: rgb(234, 166, 8);
+  font-size: 0.9rem;
+}

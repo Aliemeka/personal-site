@@ -18,19 +18,20 @@ export interface Props {
     image?: {
       url: string;
       alt: string;
-    }
+    },
+    tags?: string[];
   };
 }
 
 const {
-  content: { title, description, pubDate, updatedDate, image, author },
+  content: { title, description, pubDate, updatedDate, image, author, tags },
 } = Astro.props;
 ---
 
 <html lang='en'>
   <head>
     <BaseHead
-      title={`${title} | ${SITE_TITLE}`}
+      title={`${title} | Projects | ${SITE_TITLE}`}
       description={description}
       image={image?.url ||''}
     />
@@ -55,14 +56,14 @@ const {
       class='min-h-full bg-gradient-to-br from-slate-900 via-black to-gray-800'
     >
       <article
-        class='max-w-screen-md px-5 text-slate-300 mx-auto pt-16 sm:pt-24 md:px-10 md:pb-10 blog-page'
+        class='max-w-screen-md px-5 text-slate-300 mx-auto pt-16 sm:pt-24 md:px-10 md:pb-10 project-page'
       >
         <ul class='gap-x-2 flex text-sm'>
           <li>
             <a
-              href='/blog'
+              href='/projects'
               class='text-slate-500 hover:text-slate-200 hover:underline hover:underline-offset-2'
-              >Blog</a
+              >Projects</a
             >
           </li>/
           <li><a>{title}</a></li>
@@ -77,10 +78,21 @@ const {
             <time>{convertDate(pubDate||'')}</time>
             <p class='mb-0'>By {author}</p>
           </div>
-          <hr class='border-gray-400/40' />
+          
+          {tags && tags.length > 0 && (
+            <div class="flex flex-wrap gap-2 my-4">
+              {tags.map((tag) => (
+                <span class="px-3 py-1 text-xs rounded-full bg-slate-800 text-slate-300">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          )}
+          
+          <hr class='border-gray-400/40 mt-4' />
           {
             image ? (
-              <img width={720} height={360} src={image.url} alt={image.alt} />
+              <img width={720} height={360} src={image.url} alt={image.alt} class="mt-6 rounded-lg" />
             ) : null
           }
         </div>
@@ -91,7 +103,7 @@ const {
             </div>
           )
         }
-        <div class='inner-blog'>
+        <div class='inner-project'>
           <slot />
         </div>
       </article>
