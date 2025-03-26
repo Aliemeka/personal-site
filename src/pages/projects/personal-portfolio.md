@@ -3,7 +3,7 @@ layout: ../../layouts/Project.astro
 title: "Personal Portfolio"
 description: "My personal site built with Astro and Tailwind CSS, showcasing my projects, writing, and professional journey as a software engineer."
 image:
-  url: "/portfolio.png"
+  url: "https://res.cloudinary.com/emekadinary/image/upload/q_60/v1742965580/Projects%20Screenshot/sweet-savor_pse9r2.webp"
   alt: "Personal Portfolio Screenshot"
 pubDate: "2025-01-10"
 author: "Emeka Allison"
