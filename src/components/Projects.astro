@@ -1,0 +1,91 @@
+---
+// Projects.astro - A full-height projects section component
+---
+
+<section class="min-h-screen px-6 sm:px-8 py-20 sm:py-24 lg:py-32 md:px-20 relative z-20 border-t border-slate-800">
+  <div>
+    <h2 class="text-slate-200 text-4xl sm:text-5xl md:text-6xl mb-12">
+      Recent Projects
+    </h2>
+    
+    <div class="space-y-12">
+      <!-- Project Item 1 -->
+      <div class="border-l-2 border-indigo-500/50 pl-4 py-2">
+        <h3 class="text-slate-200 text-2xl mb-2">
+          <a href="/projects/dome-academy" class="hover:text-indigo-400 transition duration-200">
+            Dome Academy
+          </a>
+        </h3>
+        <p class="text-slate-400 mb-4">
+          A community-focused educational platform for developers, offering hands-on project-based learning and professional development resources.
+        </p>
+        <div class="flex flex-wrap gap-2 mb-4">
+          <a href="/projects/dome-academy" class="px-3 py-1 text-xs rounded-full bg-slate-800 text-slate-300 hover:bg-slate-700 transition duration-200">React</a>
+          <a href="/projects/dome-academy" class="px-3 py-1 text-xs rounded-full bg-slate-800 text-slate-300 hover:bg-slate-700 transition duration-200">Next.js</a>
+          <a href="/projects/dome-academy" class="px-3 py-1 text-xs rounded-full bg-slate-800 text-slate-300 hover:bg-slate-700 transition duration-200">Tailwind CSS</a>
+        </div>
+        <a 
+          href="/projects/dome-academy" 
+          class="text-slate-400 underline hover:text-rose-500/75 hover:underline underline-offset-2 duration-200"
+        >
+          View project →
+        </a>
+      </div>
+      
+      <!-- Project Item 2 -->
+      <div class="border-l-2 border-fuchsia-500/50 pl-4 py-2">
+        <h3 class="text-slate-200 text-2xl mb-2">
+          <a href="/projects/spit-sh" class="hover:text-fuchsia-400 transition duration-200">
+            Spit.sh
+          </a>
+        </h3>
+        <p class="text-slate-400 mb-4">
+          A URL shortener with extra features including real-time analytics, custom domains, and QR code generation to enhance your online marketing efforts.
+        </p>
+        <div class="flex flex-wrap gap-2 mb-4">
+          <a href="/projects/spit-sh" class="px-3 py-1 text-xs rounded-full bg-slate-800 text-slate-300 hover:bg-slate-700 transition duration-200">TypeScript</a>
+          <a href="/projects/spit-sh" class="px-3 py-1 text-xs rounded-full bg-slate-800 text-slate-300 hover:bg-slate-700 transition duration-200">Node.js</a>
+          <a href="/projects/spit-sh" class="px-3 py-1 text-xs rounded-full bg-slate-800 text-slate-300 hover:bg-slate-700 transition duration-200">CLI</a>
+        </div>
+        <a 
+          href="/projects/spit-sh" 
+          class="text-slate-400 underline hover:text-fuchsia-500/75 hover:underline underline-offset-2 duration-200"
+        >
+          View project →
+        </a>
+      </div>
+      
+      <!-- Project Item 3 -->
+      <div class="border-l-2 border-emerald-500/50 pl-4 py-2">
+        <h3 class="text-slate-200 text-2xl mb-2">
+          <a href="/projects/personal-portfolio" class="hover:text-emerald-400 transition duration-200">
+            Personal Portfolio
+          </a>
+        </h3>
+        <p class="text-slate-400 mb-4">
+          My personal site built with Astro and Tailwind CSS, showcasing my projects, writing, and professional journey as a software engineer.
+        </p>
+        <div class="flex flex-wrap gap-2 mb-4">
+          <a href="/projects/personal-portfolio" class="px-3 py-1 text-xs rounded-full bg-slate-800 text-slate-300 hover:bg-slate-700 transition duration-200">Astro</a>
+          <a href="/projects/personal-portfolio" class="px-3 py-1 text-xs rounded-full bg-slate-800 text-slate-300 hover:bg-slate-700 transition duration-200">Tailwind CSS</a>
+          <a href="/projects/personal-portfolio" class="px-3 py-1 text-xs rounded-full bg-slate-800 text-slate-300 hover:bg-slate-700 transition duration-200">JavaScript</a>
+        </div>
+        <a 
+          href="/projects/personal-portfolio" 
+          class="text-slate-400 underline hover:text-emerald-500/75 hover:underline underline-offset-2 duration-200"
+        >
+          View project →
+        </a>
+      </div>
+    </div>
+    
+    <div class="mt-12 pt-6 border-t border-slate-800">
+      <a 
+        href="/projects" 
+        class="text-slate-500 hover:text-slate-200 hover:underline underline-offset-2 duration-200"
+      >
+        See all projects →
+      </a>
+    </div>
+  </div>
+</section>
