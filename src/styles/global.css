@@ -4,9 +4,18 @@
   License MIT: https://github.com/HermanMartinus/bearblog/blob/master/LICENSE.md
  */
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* At the top of your global.css */
+@import "tailwindcss";
+
+:root {
+  --font-size-5xl: 3rem;
+  --font-size-6xl: 3.75rem;
+  --font-size-7xl: 4.5rem;
+  --font-size-8xl: 6rem;
+  /* Add any other custom sizes or theme values here */
+}
+
+/* Rest of your CSS */
 
 body {
   font-family: Epilogue, sans-serif;
@@ -14,35 +23,6 @@ body {
   overflow-wrap: break-word;
   line-height: 1.5;
   color: #444;
-}
-
-h1 {
-  margin: 1rem 0;
-  font-size: 2.5rem;
-}
-
-h2 {
-  margin: 1.5rem 0;
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: rgb(226 232 240);
-}
-h3 {
-  margin: 1.5rem 0;
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: rgb(226 232 240);
-}
-
-h4 {
-  margin: 1.2rem 0;
-  font-size: 1rem;
-  font-weight: 600;
-  color: rgb(226 232 240);
-}
-
-p {
-  margin-bottom: 1rem;
 }
 
 code {
