@@ -1,4 +1,5 @@
 ---
+import { Image as Img } from 'astro:assets';
 interface Props {
   src: string;
   width?: string | number;
@@ -6,6 +7,12 @@ interface Props {
   class?: string;
   alt: string;
 }
+const { src, alt, width, height, class: className } = Astro.props;
+let inferSize = false
+  if (!width || !height) {
+    inferSize = true
+  }
 ---
 
-<img loading='lazy' {...Astro.props} />
+
+<Img loading='lazy' src={src} alt={alt} width={width as any} height={height as any} inferSize={inferSize}  class={className} />
