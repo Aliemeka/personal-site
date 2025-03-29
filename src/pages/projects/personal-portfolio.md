@@ -5,7 +5,7 @@ description: "My personal site built with Astro and Tailwind CSS, showcasing my 
 image:
   url: "https://res.cloudinary.com/emekadinary/image/upload/q_60/v1742975725/Projects%20Screenshot/Emeka-site_x8lw9p.webp"
   alt: "Personal Portfolio Screenshot"
-pubDate: "2025-01-10"
+pubDate: "2022-01-04"
 author: "Emeka Allison"
 tags: ["Astro", "Tailwind CSS", "JavaScript"]
 ---

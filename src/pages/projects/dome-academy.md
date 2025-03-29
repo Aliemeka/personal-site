@@ -5,7 +5,7 @@ description: "A community-focused educational platform for developers, offering 
 image:
   url: "https://res.cloudinary.com/emekadinary/image/upload/q_60/v1742965580/Projects%20Screenshot/dome_we7dlj.webp"
   alt: "Dome Academy Screenshot"
-pubDate: "2025-03-01"
+pubDate: "2023-06-04"
 author: "Emeka Allison"
 tags: ["Next.js", "Supabase", "FastAPI", "PostgreSQL", "AWS"]
 ---

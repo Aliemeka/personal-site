@@ -5,7 +5,7 @@ description: "A food delivery service platform offering delicious meals at your 
 image:
   url: "https://res.cloudinary.com/emekadinary/image/upload/q_60/v1742965580/Projects%20Screenshot/sweet-savor_pse9r2.webp"
   alt: "Sweet Savor Website Screenshot"
-pubDate: "2024-12-05"
+pubDate: "2021-06-21"
 author: "Emeka Allison"
 tags: ["React", "Firebase", "Netlify"]
 ---

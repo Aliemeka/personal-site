@@ -5,7 +5,7 @@ description: "A URL shortener with extra features including real-time analytics,
 image:
   url: "https://res.cloudinary.com/emekadinary/image/upload/q_60/v1742965824/Projects%20Screenshot/spit-sh_xttlxw.webp"
   alt: "Spit.sh Screenshot"
-pubDate: "2025-02-15"
+pubDate: "2023-01-01"
 author: "Emeka Allison"
 tags: ["TypeScript", "Next.js", "Open Source"]
 ---
