@@ -5,7 +5,7 @@ pubDate: 2026-01-26
 description: "As techies, especially programmers, we often find ourselves facing numerous challenges on a daily basis, from debugging complex code to tackling unfamiliar technologies. However, instead of shying away from these challenges, we should embrace them wholeheartedly."
 author: "Emeka Allison"
 image:
-  url: "https://res.cloudinary.com/emekadinary/image/upload//q_55/v1704735010/emeka%27s%20blog/do_hard_things_su825w.png"
+  url: "https://res.cloudinary.com/emekadinary/image/upload/c_scale,h_1027,q_56/v1768470343/emeka's%20blog/Tech_is_not_an_industry_z0diiw.webp"
   alt: "Tech is not an Industry"
 tags: ["building", "learning", "productivity", "growth"]
 ---
