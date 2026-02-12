@@ -18,7 +18,7 @@ export interface Props {
     image?: {
       url: string;
       alt: string;
-    }
+    };
   };
 }
 
@@ -32,7 +32,7 @@ const {
     <BaseHead
       title={`${title} | ${SITE_TITLE}`}
       description={description}
-      image={image?.url ||''}
+      image={image?.url || ""}
     />
     <style>
       .title {
@@ -74,10 +74,10 @@ const {
         </h1>
         <div class='mb-8'>
           <div class='flex justify-between text-slate-400'>
-            <time>{convertDate(pubDate||'')}</time>
+            <time>{convertDate(pubDate || "")}</time>
             <p class='mb-0'>By {author}</p>
           </div>
-          <hr class='border-gray-400/40' />
+          <hr class='border-t !border-gray-400/40' />
           {
             image ? (
               <img width={720} height={360} src={image.url} alt={image.alt} />
