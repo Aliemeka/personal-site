@@ -26,7 +26,9 @@ What changed that was simple — I just started building. When the thing you're 
 
 ## What Onboard Actually Does
 
-[Onboard](https://www.onboard.xyz/) exists to solve a problem that a lot of people don't realise is a problem until it's their problem: **access to finance, regardless of where you are or what passport you hold.**
+![Onboard Global](https://res.cloudinary.com/emekadinary/image/upload/q_60/v1772081303/Projects%20Screenshot/onboard_h7h9sv.webp)
+
+[Onboard Global](https://www.onboard.xyz/) exists to solve a problem that a lot of people don't realise is a problem until it's their problem: **access to finance, regardless of where you are or what passport you hold.**
 
 If you earn in dollars, spend in euros, and save in naira — which is the reality for millions of people — the traditional banking system is not your friend. It was built for a different era, a different person, and a different world.
 
