@@ -33,8 +33,18 @@ h4 {
   color: rgb(226 232 240);
 }
 
-p {
+p,
+pre {
   margin-bottom: 1rem;
+}
+
+p a {
+  color: #94a3b8;
+  text-underline-offset: 2px;
+  text-decoration: underline;
+}
+p a:hover {
+  color: #60a5fa;
 }
 
 code {
@@ -116,4 +126,12 @@ blockquote {
 .inner-blog p > code {
   color: rgb(234, 166, 8);
   font-size: 0.9rem;
+}
+
+blockquote {
+  border: none;
+  padding-top: 20px;
+  border-left: 4px solid #999;
+  color: #ccc;
+  padding-left: 10px;
 }
