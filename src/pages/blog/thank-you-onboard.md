@@ -102,7 +102,7 @@ _Tom, Tori, Bobby, Paul, CJ, Ernest, Nonami, Chinonso_ — it was a privilege, g
 
 I'm currently open to new roles and opportunities. If you're building something meaningful and need a fullstack engineer who has wrangled financial data, wrestled with Safari bugs, and learned to think carefully about the systems he builds — let's talk. I'm also open to working with anyone building agentic models and software, a niche I have been exploring for a while. You can reach me at [emekaallison4@gmail.com](mailto:emekaallison4@gmail.com) or [LinkedIn](https://www.linkedin.com/in/chukwuemeka-allison/). You can also check my [GitHub](https://github.com/Aliemeka).
 
-In the meantime, I'm still building **[Dome Academy](https://domeinitiative.com)** — a community-driven learning platform for builders and developers. That work continues regardless of what else I'm doing. It's the kind of project you build because you believe in it, not because it's convenient.
+In the meantime, I'm still building **[Dome Academy](https://thedomeacademy.com)** — a community-driven learning platform for builders and developers. That work continues regardless of what else I'm doing. It's the kind of project you build because you believe in it, not because it's convenient.
 
 To everyone at Onboard: thank you for the growth, the challenges, and the scrums. It was real, it was good, and I'm better for it.
 
