@@ -1,7 +1,7 @@
 ---
 layout: ../../layouts/BlogPost.astro
 title: "Thank you Onboard!"
-pubDate: 2026-01-30
+pubDate: 2026-02-26
 description: "Helping democratize financial access has been the most eye-opening education I could have asked for."
 author: "Emeka Allison"
 image:
