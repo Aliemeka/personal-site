@@ -58,7 +58,7 @@ Working with financial data that changes frequently taught me to be precise abou
 
 If you take one thing from this post: **never do arithmetic on currency with floating point numbers.** `0.1 + 0.2` is not `0.3` in JavaScript. It is `0.30000000000000004`, which is not a number you want appearing anywhere near a user's balance.
 
-The correct approach is integer arithmetic — work in the smallest unit (kobo, cents, satoshis), perform all calculations there, and only format for display at the very end. Simple in principle, surprisingly easy to get wrong when moving fast.
+The correct approach is integer arithmetic — work in the smallest unit (kobo, cents, gwei, satoshis), perform all calculations there, and only format for display at the very end. Simple in principle, surprisingly easy to get wrong when moving fast.
 
 ## Challenges
 
