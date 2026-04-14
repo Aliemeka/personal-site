@@ -6,6 +6,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../config";
 import { convertDate } from "../utils";
 
 import "../styles/blog.css";
+import TableOfContents from "../components/TableOfContents.astro";
 
 export interface Props {
   content: {
@@ -20,10 +21,12 @@ export interface Props {
       alt: string;
     };
   };
+  headings: { depth: number; slug: string; text: string }[];
 }
 
 const {
   content: { title, description, pubDate, updatedDate, image, author },
+  headings,
 } = Astro.props;
 const slug = Astro.url.pathname.split("/").filter(Boolean).pop();
 ---
@@ -55,9 +58,10 @@ const slug = Astro.url.pathname.split("/").filter(Boolean).pop();
     <main
       class='min-h-full bg-gradient-to-br from-slate-900 via-black to-gray-800'
     >
-      <article
-        class='max-w-screen-md px-5 text-slate-300 mx-auto pt-16 sm:pt-24 md:px-10 md:pb-10 blog-page'
-      >
+      <div class='relative max-w-screen-xl mx-auto'>
+        <article
+          class='max-w-screen-md px-5 text-slate-300 mx-auto pt-16 sm:pt-24 md:px-10 md:pb-10 blog-page'
+        >
         <header>
           <ul class='gap-x-2 flex text-sm'>
             <li>
@@ -99,6 +103,10 @@ const slug = Astro.url.pathname.split("/").filter(Boolean).pop();
           <slot />
         </div>
       </article>
+        <aside class='hidden xl:block fixed right-8 top-24 max-h-[calc(100vh-8rem)] overflow-y-auto'>
+          <TableOfContents headings={headings} />
+        </aside>
+      </div>
     </main>
     <Footer />
   </body>
