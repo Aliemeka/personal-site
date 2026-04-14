@@ -16,13 +16,16 @@ const sortedProjects = allProjects.sort(
       </h1>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
-        {sortedProjects.map((project) => {
+        {sortedProjects.map((project, index) => {
           const filePath = project.file || '';
           const slug = filePath.split('/').pop()?.split('.').shift() || '';
 
           return (
-            <div class="border border-slate-700/60 rounded-xl p-6 flex flex-col gap-4 hover:border-slate-500/70 transition duration-200">
-              <h2 class="text-slate-200 text-xl sm:text-2xl">
+            <div
+              class="border border-slate-700/60 rounded-xl p-6 flex flex-col gap-4 hover:border-slate-500/70 transition duration-200 animate-fade-in-up"
+              style={`animation-delay: ${index * 100}ms`}
+            >
+              <h2 class="text-slate-200 text-xl sm:text-2xl" transition:name={`title-${slug}`}>
                 <a href={`/projects/${slug}`} class="hover:text-indigo-400 transition duration-200">
                   {project.frontmatter.title}
                 </a>

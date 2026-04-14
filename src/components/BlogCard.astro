@@ -11,19 +11,26 @@ interface Props {
     alt: string;
   };
   url: string;
+  index?: number;
 }
 ---
 
-<article class='pt-6 pb-4 space-y-2 max-w-screen-lg'>
-  <Image
-    src={Astro.props.image.url}
-    class='w-full h-auto bg-white mb-4 rounded-lg aspect-[4/3'
-    alt={Astro.props.image.alt}
-  />
-  <span class='text-slate-400'>{convertDate(Astro.props.date)}</span>
+<article
+  class='pt-6 pb-4 space-y-2 max-w-screen-lg animate-fade-in-up'
+  style={`animation-delay: ${(Astro.props.index ?? 0) * 100}ms`}
+>
+  <div transition:name={`image-${Astro.props.url.split('/').pop()}`}>
+    <Image
+      src={Astro.props.image.url}
+      class='w-full h-auto bg-white mb-4 rounded-lg aspect-[4/3'
+      alt={Astro.props.image.alt}
+    />
+  </div>
+  <span class='text-slate-400' transition:name={`date-${Astro.props.url.split('/').pop()}`}>{convertDate(Astro.props.date)}</span>
   <a href={Astro.props.url}>
     <h1
       class='text-3xl font-bold text-slate-200 w-4/5 hover:underline hover:underline-offset-4'
+      transition:name={`title-${Astro.props.url.split('/').pop()}`}
     >
       {Astro.props.title}
     </h1>

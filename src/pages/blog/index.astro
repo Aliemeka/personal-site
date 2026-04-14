@@ -21,13 +21,14 @@ const allPosts = await Astro.glob("./*.md");
         .sort((a, b) =>
           compareDates(a.frontmatter.pubDate, b.frontmatter.pubDate),
         )
-        .map((post) => (
+        .map((post, index) => (
           <BlogCard
             image={post.frontmatter.image}
             url={post.url!}
             title={post.frontmatter.title}
             description={post.frontmatter.description}
             date={post.frontmatter.pubDate}
+            index={index}
           />
         ))
     }

@@ -1,0 +1,174 @@
+---
+interface Props {
+  src: string;
+  width?: number;
+  height?: number;
+  class?: string;
+  alt?: string;
+  particleGap?: number;
+  particleSize?: number;
+  rippleRadius?: number;
+  rippleStrength?: number;
+}
+
+const {
+  src,
+  alt = '',
+  width = 500,
+  height = 500,
+  class: className = '',
+  particleGap = 4,
+  particleSize = 2,
+  rippleRadius = 80,
+  rippleStrength = 15,
+} = Astro.props;
+---
+
+<div
+  class={`particle-image-container ${className}`}
+  data-src={src}
+  data-width={width}
+  data-height={height}
+  data-particle-gap={particleGap}
+  data-particle-size={particleSize}
+  data-ripple-radius={rippleRadius}
+  data-ripple-strength={rippleStrength}
+  style={`width: ${width}px; height: ${height}px; position: relative;`}
+>
+  <canvas
+    width={width}
+    height={height}
+    aria-label={alt}
+    role="img"
+    style="width: 100%; height: 100%;"
+  ></canvas>
+</div>
+
+<script>
+  class ParticleEffect {
+    private canvas: HTMLCanvasElement;
+    private ctx: CanvasRenderingContext2D;
+    private particles: { x: number; y: number; origX: number; origY: number; r: number; g: number; b: number; a: number }[] = [];
+    private mouse = { x: -9999, y: -9999, active: false };
+    private animId = 0;
+    private width: number;
+    private height: number;
+    private gap: number;
+    private size: number;
+    private rippleRadius: number;
+    private rippleStrength: number;
+    private time = 0;
+
+    constructor(container: HTMLElement) {
+      this.canvas = container.querySelector('canvas')!;
+      this.ctx = this.canvas.getContext('2d')!;
+
+      this.width = Number(container.dataset.width);
+      this.height = Number(container.dataset.height);
+      this.gap = Number(container.dataset.particleGap);
+      this.size = Number(container.dataset.particleSize);
+      this.rippleRadius = Number(container.dataset.rippleRadius);
+      this.rippleStrength = Number(container.dataset.rippleStrength);
+
+      this.canvas.addEventListener('mousemove', (e) => {
+        const rect = this.canvas.getBoundingClientRect();
+        const scaleX = this.width / rect.width;
+        const scaleY = this.height / rect.height;
+        this.mouse.x = (e.clientX - rect.left) * scaleX;
+        this.mouse.y = (e.clientY - rect.top) * scaleY;
+        this.mouse.active = true;
+      });
+
+      this.canvas.addEventListener('mouseleave', () => {
+        this.mouse.active = false;
+      });
+
+      this.loadImage(container.dataset.src!);
+    }
+
+    private loadImage(src: string) {
+      const img = new Image();
+      img.crossOrigin = 'anonymous';
+      img.onload = () => {
+        // Draw image to an offscreen canvas to read pixel data
+        const offscreen = document.createElement('canvas');
+        offscreen.width = this.width;
+        offscreen.height = this.height;
+        const offCtx = offscreen.getContext('2d')!;
+        offCtx.drawImage(img, 0, 0, this.width, this.height);
+        const imageData = offCtx.getImageData(0, 0, this.width, this.height);
+        this.createParticles(imageData);
+        this.animate();
+      };
+      img.src = src;
+    }
+
+    private createParticles(imageData: ImageData) {
+      const { data, width } = imageData;
+      this.particles = [];
+
+      for (let y = 0; y < this.height; y += this.gap) {
+        for (let x = 0; x < this.width; x += this.gap) {
+          const i = (y * width + x) * 4;
+          const r = data[i];
+          const g = data[i + 1];
+          const b = data[i + 2];
+          const a = data[i + 3];
+
+          // Skip fully transparent pixels
+          if (a < 10) continue;
+
+          this.particles.push({
+            x, y,
+            origX: x,
+            origY: y,
+            r, g, b, a,
+          });
+        }
+      }
+    }
+
+    private animate = () => {
+      this.time += 0.05;
+      this.ctx.clearRect(0, 0, this.width, this.height);
+
+      for (const p of this.particles) {
+        let drawX = p.origX;
+        let drawY = p.origY;
+
+        if (this.mouse.active) {
+          const dx = p.origX - this.mouse.x;
+          const dy = p.origY - this.mouse.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+
+          if (dist < this.rippleRadius) {
+            // Ripple: sine wave displacement based on distance and time
+            const wave = Math.sin(dist * 0.15 - this.time * 4) * this.rippleStrength;
+            const factor = 1 - dist / this.rippleRadius;
+            const angle = Math.atan2(dy, dx);
+            drawX = p.origX + Math.cos(angle) * wave * factor;
+            drawY = p.origY + Math.sin(angle) * wave * factor;
+          }
+        }
+
+        // Ease particles back to origin
+        p.x += (drawX - p.x) * 0.15;
+        p.y += (drawY - p.y) * 0.15;
+
+        this.ctx.fillStyle = `rgba(${p.r},${p.g},${p.b},${p.a / 255})`;
+        this.ctx.fillRect(p.x, p.y, this.size, this.size);
+      }
+
+      this.animId = requestAnimationFrame(this.animate);
+    };
+
+    destroy() {
+      cancelAnimationFrame(this.animId);
+    }
+  }
+
+  // Initialize all particle image containers
+  document.querySelectorAll<HTMLElement>('.particle-image-container').forEach((el) => {
+    new ParticleEffect(el);
+  });
+</script>
