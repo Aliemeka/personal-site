@@ -57,7 +57,7 @@ const slug = Astro.url.pathname.split("/").filter(Boolean).pop();
     <Header title={SITE_TITLE} />
 
     <main
-      class='min-h-full bg-gradient-to-br from-slate-900 via-black to-gray-800'
+      class='min-h-full bg-gradient-to-br from-slate-900 via-black to-gray-800 pb-40'
     >
       <div class='relative max-w-screen-xl mx-auto'>
         <article
@@ -126,7 +126,9 @@ const slug = Astro.url.pathname.split("/").filter(Boolean).pop();
             <slot />
           </div>
         </article>
-        <aside class='hidden xl:block fixed right-8 top-24 max-h-[calc(100vh-8rem)] overflow-y-auto'>
+        <aside
+          class='hidden xl:block fixed right-8 top-24 max-h-[calc(100vh-8rem)] overflow-y-auto'
+        >
           <TableOfContents headings={headings} />
         </aside>
       </div>
