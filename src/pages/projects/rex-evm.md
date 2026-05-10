@@ -8,7 +8,7 @@ tags:
   ["Rust", "Ethereum", "EVM", "Systems Programming", "Bytecode", "Blockchain"]
 ---
 
-# rex-evm
+# rex-evm - Light-weight EVM
 
 A minimal Ethereum Virtual Machine written in Rust, with a small CLI for executing raw smart contract bytecode. It runs hex bytecode directly from your terminal, traces every opcode, reports gas usage, and stays small enough to drop onto any machine with a Rust toolchain.
 
