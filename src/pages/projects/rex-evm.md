@@ -21,10 +21,10 @@ I wanted something lightweight that I could drop onto any machine, run a hex str
 ## Features
 
 - Full opcode coverage for arithmetic, comparison, bitwise, hashing, memory, storage, calldata, code introspection, and control flow
-- Proper call-frame model with CALL, CALLCODE, DELEGATECALL, STATICCALL, CREATE, and CREATE2
+- Proper call-frame model with `CALL`, `CALLCODE`, `DELEGATECALL`, `STATICCALL`, `CREATE`, and `CREATE2`
 - Per-opcode execution tracing with `--trace` for debugging bytecode behaviour
 - Gas accounting with configurable gas limits
-- Static-context enforcement (no SSTORE, LOG, or value-bearing CALL inside STATICCALL)
+- Static-context enforcement (no `SSTORE`, `LOG`, or value-bearing `CALL` inside `STATICCALL`)
 - World-state snapshotting so reverted sub-calls roll back cleanly
 - Two-crate workspace separating the interpreter from shared primitives
 
@@ -176,9 +176,32 @@ Status:   STOP
 - **Gas used** is `gas_limit - gas_remaining`
 - **Status** is the halt reason: `STOP`, `RETURN`, `REVERT`, `SELFDESTRUCT`, or the error message on exceptional halt
 
+## Build from source
+
+Prerequisites: a recent stable Rust toolchain (2024 edition — Rust 1.85+). Install via [rustup](https://rustup.rs/) if you don't have it.
+
+Clone and build:
+
+```sh
+git clone <repo-url> rex-evm
+cd rex-evm
+cargo build --release
+```
+
+The compiled CLI will be at `target/release/evm`. You can either invoke it directly or install it onto your `PATH`:
+
+```sh
+# run the release binary directly
+./target/release/evm run --code 0x6001600201
+
+# or install to ~/.cargo/bin so `evm` is on PATH
+cargo install --path bin/evm-cli
+evm run --code 0x6001600201
+```
+
 ## What I Learned
 
-Building rex-evm forced me to internalise things I'd previously only read about: how the call stack actually works under DELEGATECALL, why JUMPDEST validation has to be pre-computed, how revert semantics interact with state snapshotting, and how gas is metered at the opcode level. None of this is mysterious once you've implemented it. It's just a discipline of being honest about state and lifetimes, which Rust enforces by default.
+Building rex-evm forced me to internalise things I'd previously only read about: how the call stack actually works under `DELEGATECALL`, why `JUMPDEST` validation has to be pre-computed, how revert semantics interact with state snapshotting, and how gas is metered at the opcode level. None of this is mysterious once you've implemented it. It's just a discipline of being honest about state and lifetimes, which Rust enforces by default.
 
 It also reinforced something I keep coming back to: separating per-frame state from host state up front makes everything downstream simpler. Once `CallFrame` and `Substate` were properly partitioned, adding new opcodes became almost mechanical.
 
