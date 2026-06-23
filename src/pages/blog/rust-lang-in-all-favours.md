@@ -1,19 +1,19 @@
 ---
 layout: ../../layouts/BlogPost.astro
 title: "Rust Lang: In all Flavours"
-pubDate: 2026-04-18
+pubDate: 2026-06-22
 description: "Rust is a systems programming language that embodies the best accept of computer programming and still teaches you fundamentals"
 author: "Emeka Allison"
 image:
-  url: "https://res.cloudinary.com/emekadinary/image/upload/c_scale,h_1027,q_56/v1768470343/emeka's%20blog/Tech_is_not_an_industry_z0diiw.webp"
+  url: "https://res.cloudinary.com/emekadinary/image/upload/q_53/v1782167853/emeka's%20blog/Rust_in_all_Flavours_hklp0w.webp"
   alt: "Tech is not an Industry"
 tags:
   ["systems-programming", "Rust", "language", "programming", "computer science"]
 ---
 
-## I can now say I'm good at Rust...Well, kinda
+## I can now say I'm good at Rust 🦀...Well, kinda
 
-I started off this year with a New Year's resolution to master [Rust programming language](https://rust-lang.org/). Let's just say it was quite a fullfilling journey, one which I'm happy and proud of myself for doing. [_Yeah! Audience cheers! Claps everywhere_].
+I started off this year with a New Year's resolution to master the [Rust programming language](https://rust-lang.org/). Let's just say it was quite a fullfilling journey, one which I'm happy and proud of myself for doing. [_Yeah! Audience cheers! Claps everywhere_].
 
 It seemed daunting at first with it's reputation as a **hard language to master** with a **very steep learning curve**. But that wasn't the case in my experience. I mean: yeah, there were some parts that were quite daunting (parts which I will discuss a lot more in later parts of this articles), but a lot of it is just building upon the knowledge of common programming concepts like variables, constants, functions, operations etc and mastering the **borrow checker**. So it wasn't that had for me to learn and get great (at least better) at it.
 
@@ -21,7 +21,9 @@ It seemed daunting at first with it's reputation as a **hard language to master*
 
 To be very honest, I've been trying to learn Rust on my own for quite a while; I think since 2022 or something. It was great but concepts weren't sticking and since I was working with other programming languages (Python, C# and Typescript) for work and side projects, I didn't really bother to get good at it. I did some projects and all but really grab (Nigerian pigin lingua, means "understand properly") it.
 
-So I registered for [Web3Bridge](https://www.web3bridgeafrica.com/) Rust Masterclass. Taking part in the masterclass really helped me understand the language a lot better. I can confidently say I can build basic backend REST api with Rust using [Axum](https://docs.rs/axum/latest/axum/). I can also implement different communication protocols using [Tokio](https://tokio.rs/) and cryptographic/encoding algorithms with just plain Rust without using external libraries – and bit of blockchian protocol engineering
+So I registered for [Web3Bridge](https://www.web3bridgeafrica.com/) Rust Masterclass. Taking part in the masterclass really helped me understand the language a lot better. I can confidently say I can build basic backend REST api with Rust using [Axum](https://docs.rs/axum/latest/axum/). I can also implement different communication protocols using [Tokio](https://tokio.rs/) and cryptographic/encoding algorithms with just plain Rust without using external libraries – and bit of blockchian protocol engineering. I was even able to publish a package to [crates.io](https://crates.io) – [rs-miniredis](https://crates.io/crates/rs-miniredis), a mini Redis clone built for caching data.
+
+Enough about my journey though, let me actually show you some of the stuff that made Rust click for me. We'll start from the basics and build up to the parts that scared me at first.
 
 ## First steps — Understand the borrowing checker
 
@@ -109,7 +111,7 @@ fn main(){
 
 Gives the expected output: `Square of 5 is 25`.
 
-What is we want to change the value of num1. Well there are two ways that can happen
+What is we want to change the value of `num1`. Well there are two ways that can happen
 
 _We could use shadowing_
 
@@ -120,7 +122,7 @@ let num1: u8 = 6;
 // Shadowed value
 let num1: u32 = 100_000;
 
-println("num1 is {}", num1) // Displays num1 is 100000
+println("num1 is {}", num1) // Displays: num1 is 100000
 ```
 
 _Or we could update it based on conditions in the app_
@@ -254,12 +256,15 @@ fn main() {
 
 If you tried to take `r3` (a mutable borrow) _while_ `r1` or `r2` were still in use, it **won't compile**. Rust refuses to let one part of your code read a value while another part is busy changing it. That single rule kills a whole category of bugs — data races — before your program even runs. To understand better, checkout the explanation of [mutable references](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html#mutable-references) from the Rust Book.
 
+### Why does Rust use the borrow-checker?
+
 Most languages pick one of two ways to clean up heap memory:
 
-- A **garbage collector** (Go, Java, Python) that runs in the background and frees memory for you — convenient, but with a runtime cost you don't control.
-- **Manual management** (C, C++) where _you_ call `malloc`/`free` — fast, but forget a `free` and you leak memory; free twice and you crash.
+1. A **garbage collector** (Go, Java, Python) that runs in the background and frees memory for you — convenient, but with a runtime cost you don't control.
+2. **Manual management** (C, C++) where _you_ call `malloc`/`free` — fast, but forget a `free` and you leak memory; free twice and you crash.
+   <br><br>
 
-- **Rust** takes a third path. There's **no garbage collector and no manual `free`**. Instead, memory is tied to ownership: when the owner of a value goes out of scope, Rust automatically frees it. We saw this earlier — `name` got dropped at the end of `hello`.
+**Rust** takes a third path. There's **no garbage collector and no manual `free`**. Instead, memory is tied to ownership: when the owner of a value goes out of scope, Rust automatically frees it. We saw this earlier — `name` got dropped at the end of `hello`.
 
 ```rust
 fn main() {
@@ -274,6 +279,293 @@ fn main() {
 } // <- s goes out of scope here, its memory is freed too
 ```
 
-### Why does Rust use the borrow-checker?
+The borrow-checker comes with an advantage — It lets the compiler catch memory mistakes like using a freed value or freeing it twice before your program ever runs. That way you get the speed of manual memory management without needing a garbage collector or the bugs that usually come with managing memory yourself.
 
-It lets the compiler catch memory mistakes like using a freed value or freeing it twice before your program ever runs. That way you get the speed of manual memory management without needing a garbage collector or the bugs that usually come with managing memory yourself.
+## Structs and Traits
+
+If you coming from programming languages like Python, Java or Javascript, you should be familiar with object oriented programming (OOP). This means you introduced to the concept of using **Classes** and **Objects** in grouping related data.
+
+_Here is an example in Python_
+
+```python
+class Animal(): # Parent class (Animal)
+  specie: str # attribute
+  is_warmblooded: bool # attribute
+
+  def __init__(self): # Constructor
+    pass
+
+
+class Dog(Animal): # Dog class inherits from Animal
+  name: str # Dog has additional attribute (name)
+
+  def __init__(self, name: str): # Constructor overwrites parent class constructor
+    self.specie = "canine" # Inherited attribute (specie)
+    self.is_warmblooded = True # Inherited attribute (is_warmblooded)
+
+    self.name = name # Attribute (name) is set when Dog object is initialized
+```
+
+In Rust however, items with related data are grouped together using the `struct` datatype. Other languages that use structs include Go, C and C++. Structs in Rust however, do not support in inheritance. This is done by design to avoid the problems that comes with Class inheritance. Instead Rust uses a `trait` to pass behaviour to multiple structs.
+
+_Here's what a struct looks like:_
+
+```rust
+struct Animal{
+  name: String,
+  specie: String,
+  is_warmblooded: bool,
+}
+```
+
+Structs in Rust also come in different flavours. The one you just saw above is a **field** struct. Other types of structs include **unit** struct and **tuple** struct.
+
+```rust
+struct MyStruct; // Unit structs
+
+struct Coordinates(i32, i32) // Tuple structs
+```
+
+Using structs in programmes is also quite straight forward.
+
+```rust
+struct User{
+  id: i32,
+  name: &str, // &str signifies a string slice
+  email: &str,
+  age: u8,
+  active: bool,
+}
+
+struct Coordinates(i32, i32)
+
+struct UnitStruct;
+
+fn main(){
+  // Initiatizing feild struct (User) the struct will look
+  let user1 = User{
+    id: 1,
+    name: "Emma Rogers",
+    email: "emma@rustexample.com",
+    age: 21,
+    active: true,
+  };
+
+  let cord_1 = Coordinates(23, -10);
+
+  let unit_struct = UnitStruct;
+}
+```
+
+Let say there is a scenrio where I have two structs with similar field data, you use `..`, just like the spread operator in Javascript.
+
+```rust
+struct User{
+  id: i32,
+  name: &str,
+  email: &str,
+  age: u8,
+  active: bool,
+}
+
+fn main(){
+  let user1 = User{
+    id: 1,
+    name: "Emma Rogers",
+    email: "emma@rustexample.com",
+    age: 21,
+    active: true,
+  };
+
+  let user2 = User{
+    id: 2,
+    name: user1.name,
+    email: user1.email,
+    age: user1.age,
+    active: user1.active
+  }
+}
+```
+
+_`user2` can also be written as_
+
+```rust
+// --snip--
+
+fn main(){
+  // --snip--
+
+  let user2 = User{
+    id: 2,
+    ..user1,
+  }
+}
+```
+
+#### Struct methods
+
+Similar to how classes in other languages have methods which are functions which a class can call, structs also have methods. And instead of writing them inside the struct like you would in a class, you define them separately in an `impl` (implementation) block. The first argument is always `&self`, which is a reference to the instance the method is called on.
+
+```rust
+struct User{
+  id: i32,
+  name: &str,
+  email: &str,
+  age: u8,
+  active: bool,
+}
+
+// Methods for User live in an impl block
+impl User {
+  // &self borrows the instance, so we can read its fields
+  fn greet(&self) {
+    println!("Hi, I'm {} and I'm {} years old", self.name, self.age);
+  }
+
+  // &mut self lets the method modify the instance
+  fn deactivate(&mut self) {
+    self.active = false;
+  }
+}
+
+fn main(){
+  let mut user1 = User{
+    id: 1,
+    name: "Emma Rogers",
+    email: "emma@rustexample.com",
+    age: 21,
+    active: true,
+  };
+
+  user1.greet(); // Calls the method with the dot syntax
+  user1.deactivate(); // user1 has to be mut for this to work
+}
+```
+
+Now here's where the syntax can improve. Building that struct by hand every time is tiring, so we can add an **associated function** (a function in the `impl` block that doesn't take `self`) to act like a constructor. The convention is to call it `new`, and it returns `Self`.
+
+```rust
+impl User {
+  // No &self here, this is an associated function
+  fn new(name: &str, email: &str, age: u8) -> Self {
+    Self {
+      id: 1,
+      name,        // field init shorthand: name: name
+      email,       // same as email: email
+      age,
+      active: true, // sensible default
+    }
+  }
+}
+
+fn main(){
+  // Way cleaner, we call it with the :: syntax
+  let user1 = User::new("Emma Rogers", "emma@rustexample.com", 21);
+
+  user1.greet();
+}
+```
+
+Notice two things that clean up the code. `Self` is just shorthand for the struct's own type (`User` here), and when a variable has the same name as the field, you can write `name` instead of `name: name`. Small things, but they add up and make your structs a lot nicer to work with.
+
+### Extending the capability of a struct with traits
+
+If you've worked with interfaces in languages like Typescript, Go or Java, traits will feel familiar. A **trait** is a set of methods that a type promises to provide. It lets you define shared behaviour, then implement that behaviour for any struct you want. So instead of every method living in one `impl` block, you can group related behaviour into a trait and share it across different types.
+
+Let's define a `Describe` trait and implement it for our `User`.
+
+```rust
+// The trait declares what behaviour a type should have
+trait Describe {
+  fn describe(&self) -> String;
+}
+
+// We implement the trait for User with the `impl Trait for Type` syntax
+impl Describe for User {
+  fn describe(&self) -> String {
+    format!("{} ({})", self.name, self.email)
+  }
+}
+
+fn main(){
+  let user1 = User::new("Emma Rogers", "emma@rustexample.com", 21);
+
+  println!("{}", user1.describe()); // Emma Rogers (emma@rustexample.com)
+}
+```
+
+Now this is where the **two types of trait methods** come in.
+
+The first are **required methods**. These only have a signature and no body, like the `describe` above. Any type that implements the trait _must_ provide its own version, otherwise the code won't compile.
+
+The second are **default methods**. These come with a body already written, so a type gets them for free and can use them as-is or override them when it needs something different.
+
+```rust
+trait Describe {
+  // Required method, every type must implement this
+  fn describe(&self) -> String;
+
+  // Default method, comes with a body already
+  fn shout(&self) -> String {
+    // It can even call other methods on the trait
+    format!("{}!!!", self.describe())
+  }
+}
+
+impl Describe for User {
+  // We only have to implement the required method
+  fn describe(&self) -> String {
+    format!("{} ({})", self.name, self.email)
+  }
+  // shout() is inherited for free
+}
+
+fn main(){
+  let user1 = User::new("Emma Rogers", "emma@rustexample.com", 21);
+
+  println!("{}", user1.shout()); // Emma Rogers (emma@rustexample.com)!!!
+}
+```
+
+#### Derivable traits
+
+Some traits are so common that writing the `impl` block by hand every time would be a pain. So Rust lets you _derive_ them. Just add `#[derive(...)]` on top of your struct and the compiler writes the implementation for you based on your fields. You'll probably see a struct with `#[derive(Debug, Copy, Clone)]` in a Rust codebase. The standard library gives you a fixed set of these: `Debug`, `Clone`, `Copy`, `PartialEq`, `Eq`, `PartialOrd`, `Ord`, `Hash` and `Default`. It can do this because their behaviour just follows from the fields, so there's nothing for you to decide, the compiler already knows what to write.
+
+Let's see the `Debug` trait in action. It lets you print a type for debugging using the `{:?}` formatter, which would otherwise fail to compile.
+
+```rust
+// Without #[derive(Debug)] this println! won't compile
+#[derive(Debug)]
+struct Point(i32, i32)
+
+fn main() {
+  let p = Point(3, 7);
+
+  // {:?} is the debug formatter
+  println!("{:?}", p); // Point (3, 7)
+}
+```
+
+And here is the `Copy` trait. Remember earlier how passing a `String` _moves_ it? With `Copy`, the value gets copied instead, so the original is still usable after. It only works on types whose fields all live on the stack, which is why `Point` (two `i32`s) qualifies.
+
+```rust
+#[derive(Debug, Copy, Clone)] // Copy needs Clone alongside it
+struct Wallet {
+  address: &str;
+  balance: u32,
+}
+
+fn main() {
+  let w1 = Wallet { address: "0xdefef", balance: 100  };
+
+  let w2 = w1; // w1 is COPIED into w2, not moved
+
+  // Both are still valid because Wallet is Copy
+  println!("{:?}", w1); // Wallet { address: "0xdefef", balance: 100  }
+  println!("{:?}", w2); // Wallet { address: "0xdefef", balance: 100  }
+}
+```
+
+## Superpowered Enums
+
+## Error Handling from Heaven
