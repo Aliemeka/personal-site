@@ -31,7 +31,7 @@ Rust is a strongly typed, performance driven, low-level systems programming lang
 
 #### Declaring variables
 
-_Declaring variables in Rust_
+Declaring variables in Rust
 
 ```rust
 // Signed integars
@@ -44,7 +44,7 @@ let num1: u32 = 40;
 let num3: u8 = 60;
 ```
 
-_Declaring variables in C_
+Declaring variables in C
 
 ```c
 #include <stdint.h>
@@ -60,7 +60,7 @@ unsigned int8_t = 60;
 
 #### Writing functions
 
-_Writing a function in Rust_
+Writing a function in Rust
 
 ```rust
 fn sum_numbers(a: u16, b: u16) -> u16 {
@@ -77,7 +77,7 @@ fn sum_numbers(a: u16, b: u16) -> u16 {
 }
 ```
 
-_Writing a function in Go_
+Writing a function in Go
 
 ```go
 func sum_numbers(a int, b int) int {
@@ -85,7 +85,7 @@ func sum_numbers(a int, b int) int {
 }
 ```
 
-_Writing a function in Typescript_
+Writing a function in Typescript
 
 ```typescript
 function sum_numbers(a: number, b: number): number {
@@ -113,7 +113,7 @@ Gives the expected output: `Square of 5 is 25`.
 
 What is we want to change the value of `num1`. Well there are two ways that can happen
 
-_We could use shadowing_
+We could use shadowing
 
 ```rust
 // Original
@@ -125,7 +125,7 @@ let num1: u32 = 100_000;
 println("num1 is {}", num1) // Displays: num1 is 100000
 ```
 
-_Or we could update it based on conditions in the app_
+Or we could update it based on conditions in the app
 
 ```rust
 let num: u16 = 8;
@@ -158,7 +158,7 @@ println("Num: {}", num);
 
 This code will run! ✅
 
-_Whatabout this code: Will it run or not?_
+Whatabout this code: Will it run or not?
 
 ```rust
 fn hello(name: String){
@@ -285,7 +285,7 @@ The borrow-checker comes with an advantage — It lets the compiler catch memory
 
 If you coming from programming languages like Python, Java or Javascript, you should be familiar with object oriented programming (OOP). This means you introduced to the concept of using **Classes** and **Objects** in grouping related data.
 
-_Here is an example in Python_
+Here is an example in Python
 
 ```python
 class Animal(): # Parent class (Animal)
@@ -308,7 +308,7 @@ class Dog(Animal): # Dog class inherits from Animal
 
 In Rust however, items with related data are grouped together using the `struct` datatype. Other languages that use structs include Go, C and C++. Structs in Rust however, do not support in inheritance. This is done by design to avoid the problems that comes with Class inheritance. Instead Rust uses a `trait` to pass behaviour to multiple structs.
 
-_Here's what a struct looks like:_
+Here's what a struct looks like:
 
 ```rust
 struct Animal{
@@ -387,7 +387,7 @@ fn main(){
 }
 ```
 
-_`user2` can also be written as_
+`user2` can also be written as
 
 ```rust
 // --snip--
@@ -568,4 +568,207 @@ fn main() {
 
 ## Superpowered Enums
 
+**Enums** are one of my favourite parts of Rust. Unlike other enums in other languages, Rust enums have extra abilities that feel like superpowers. Enums are using used to represent changing data states in most programming languages. In Rust, enums can also contain values with different datatypes.
+
+Here's a simple example
+
+```rust
+enum MachineState{
+  Idle,
+  Running,
+  Failure(String),
+  Completed(Vec<String>),
+}
+```
+
+This would have been like any other enum in any programming language, but their are two peculiar fields in `MachineState` enum: `Failure(String)`and `Results(Vec<String>)`. This means that you are able to do even more with Rust enums. `Failure(String)` does not show a failed state, it also contains a string that shows the reason for the failure. Likewise, `Results(Vec<String>)`
+
+### Pattern matching
+
+Pattern matching is how Rust lets you look at a value, figure out what shape it is, and pull the data out of it all at once. Using the `match` keyword, you list out the possible cases a value could be and what to do for each one, kind of like a `switch` statement but way more powerful. The neat part is that Rust forces you to handle every possible case, so if there's a variant you forgot to deal with, your code simply won't compile.
+
+Here is an example from [The Rust Book](https://doc.rust-lang.org/book/ch06-02-match.html#listing-6-3):
+
+```rust
+enum Coin {
+    Penny,
+    Nickel,
+    Dime,
+    Quarter,
+}
+
+fn value_in_cents(coin: Coin) -> u8 {
+    match coin {
+        Coin::Penny => 1,
+        Coin::Nickel => 5,
+        Coin::Dime => 10,
+        Coin::Quarter => 25,
+    }
+}
+```
+
+This is where enums like `MachineState` really shine because variants like `Failure(String)` carry data, `match` lets you grab that inner value and bind it to a variable right there in the branch, so you can read the failure message or loop over the results without any extra unwrapping.
+
+```rust
+fn handle_state(state: MachineState) {
+  match state {
+    MachineState::Idle => println!("Nothing happening yet"),
+    MachineState::Running => println!("Machine is working..."),
+    // We pull the String right out of the variant and use it
+    MachineState::Failure(msg) => println!("It broke: {}", msg),
+    // Same here, we grab the Vec and loop over it
+    MachineState::Completed(results) => {
+      for r in results {
+        println!("Result: {}", r);
+      }
+    }
+  }
+}
+```
+
+Rust's standard library also has powerful enum types. The two most popular ones are `Option<T>`, with `Some(T)` and `None`, and `Result<T, E>`, with `Ok(T)` and `Err(E)`.
+
+Other enums include:
+
+- `std::cmp::Ordering` with `Less`, `Equal`, `Greater` returned by `cmp()` and used all over sorting and comparison code.
+- `std::ops::Bound` with `Included`, `Excluded`, `Unbounded` used to describe the ends of a range.
+- `std::task::Poll` with `Ready` and `Pending` returned by async tasks to say whether a value is ready yet.
+- `std::net::IpAddr` with `V4` and `V6` representing either kind of IP address.
+- `std::num::FpCategory` with `Nan`, `Infinite`, `Zero`, `Subnormal`, `Normal` used to classify what kind of value a floating point number is.
+
+### The `Option<T>` type
+
+`Option<T>` is how Rust handles a value that might or might not be there. Instead of `null` like in other languages, you get an enum with two variants: `Some(T)` when there's a value, and `None` when there isn't. Because the absence is part of the type, the compiler forces you to handle the empty case, so you can't accidentally use a value that isn't there.
+
+```rust
+let some_number: Option<i32> = Some(5); // has a value
+let nothing: Option<i32> = None;        // empty
+```
+
+This is handy for structs where a field is optional. Say a user might not have added a phone number yet:
+
+```rust
+struct User {
+  name: String,
+  phone: Option<String>, // optional field
+}
+
+fn main() {
+  let user = User {
+    name: String::from("Emma"),
+    phone: None, // no phone number yet
+  };
+}
+```
+
+We can even rewrite `user` to look like this:
+
+```rust
+// --snip--
+
+let user = User {
+  name: String::from("Emma"),
+}; // We removed the phone field because it is optional
+```
+
+To safely get at the value inside, `if let` is the quickest way. It runs the block only when the `Option` is `Some`, and hands you the inner value:
+
+```rust
+// Only runs if phone is Some, binds the inner String to `number`
+if let Some(number) = user.phone {
+  println!("Phone: {}", number);
+} else {
+  println!("No phone number on file");
+}
+```
+
+I will cover `Result<T, E>` type under [error handling](#expecting-errors-as-a-value).
+
 ## Error Handling from Heaven
+
+In a lot of languages, errors are handled by throwing and catching exceptions. Take Java, you wrap risky code in a `try` block and catch whatever blows up in a `catch` block.
+
+```java
+try {
+  int result = divide(10, 0);
+  System.out.println(result);
+} catch (ArithmeticException e) {
+  System.out.println("Error: " + e.getMessage());
+}
+```
+
+The problem here is that nothing in the function's signature tells you it can fail. You only find out when it throws at runtime, and if you forget to catch it, your program crashes. Rust takes a different route. It doesn't have exceptions at all. Instead errors are just regular values you have to deal with, and the type system makes sure you actually do. There are two flavours of failure: the unrecoverable kind that should just stop everything, and the recoverable kind you can handle and move on from.
+
+### Give your code a `panic`-attack!
+
+For the unrecoverable kind, Rust has the `panic!` macro. When it runs, the program prints an error message and stops right there. You use it when something has gone so wrong that there's no point continuing.
+
+```rust
+fn main() {
+  panic!("something went really wrong"); // stops the program immediately
+
+  println!("this line never runs");
+}
+```
+
+A lot of operations panic for you under the hood too, like indexing past the end of a vector:
+
+```rust
+let v = vec![1, 2, 3];
+println!("{}", v[10]); // panics: index out of bounds
+```
+
+### Unwrapping and providing fallbacks
+
+`Option` and `Result` come with helper methods to get at the value inside. The quickest is `unwrap()`, which hands you the value if it's there and panics if it isn't. Handy for quick scripts, but risky in real code.
+
+```rust
+let phone: Option<String> = None;
+
+let p = phone.unwrap(); // ❌ panics because it's None
+```
+
+Instead of panicking, you can supply a fallback with `unwrap_or_else()`, or convert an empty `Option` into a proper error with `ok_or_else()`. Both take a closure that only runs when the value is missing.
+
+```rust
+let phone: Option<String> = None;
+
+// unwrap_or_else: use a default instead of crashing
+let p = phone.clone().unwrap_or_else(|| "no phone on file".to_string());
+
+// ok_or_else: turn None into an Err so it becomes a Result
+let result: Result<String, String> = phone.ok_or_else("phone is missing".to_string());
+```
+
+### Expecting Errors as a Value
+
+For recoverable errors, Rust uses the `Result<T, E>` type we mentioned earlier. A function that can fail returns `Ok(value)` on success or `Err(error)` on failure, and the caller has to `match` on it to get the value out. The error is right there in the return type, so you can't pretend it doesn't exist.
+
+```rust
+fn divide(a: i32, b: i32) -> Result<i32, String> {
+  if b == 0 {
+    return Err("cannot divide by zero".to_string());
+  }
+  Ok(a / b)
+}
+
+fn main() {
+  match divide(10, 0) {
+    Ok(value) => println!("Result: {}", value),
+    Err(e) => println!("Error: {}", e),
+  }
+}
+```
+
+If you've written Go, this might look familiar, since Go also treats errors as values. The difference is Go returns them as a separate value alongside the result.
+
+```go
+result, err := divide(10, 0)
+if err != nil {
+  fmt.Println("Error:", err)
+  return
+}
+fmt.Println(result)
+```
+
+But here's the thing, Go doesn't force you to check `err`. You can ignore it with `_` and carry on with a result that might be garbage. Rust bundles the success and the error into one `Result` value, so the only way to get at the result is to handle the error case first. That, plus the `?` operator for cleanly passing errors up the call stack, is what makes error handling in Rust feel less like a chore and more like heaven.
