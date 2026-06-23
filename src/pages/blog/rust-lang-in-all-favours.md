@@ -771,4 +771,68 @@ if err != nil {
 fmt.Println(result)
 ```
 
-But here's the thing, Go doesn't force you to check `err`. You can ignore it with `_` and carry on with a result that might be garbage. Rust bundles the success and the error into one `Result` value, so the only way to get at the result is to handle the error case first. That, plus the `?` operator for cleanly passing errors up the call stack, is what makes error handling in Rust feel less like a chore and more like heaven.
+But here's the thing, Go doesn't force you to check `err`. You can ignore it with `_` and carry on with a result that might be garbage. Rust bundles the success and the error into one `Result` value, so the only way to get at the result is to handle the error case first. That, plus the `?` operator for cleanly passing errors up the call stack, is what makes error handling in Rust feel less like a chore and more like Heaven.
+
+## Lifetimes are well... a lot!
+
+To be totally honest with you, lifetimes are not my favourite part of Rust. But just like Thanos says, _"Hate it, dread it, [lifetimes] arrive all the same"_. So they are inevitable.
+
+To better understand lifetimes let's look at this code that trys to determine the longest between two words.
+
+```rust
+fn longest(x: &str, y: &str) -> &str {
+  if x.len() > y.len() { x } else { y }
+}
+
+fn main() {
+  let word1 = String::from("Chicarito");
+  let word2 = String::from("Ogbeni");
+
+  let longest_word = longest(word1, word2); // 👀
+  println!("The longest word is {longest_word}");
+}
+```
+
+Guess what? THIS CODE DOES NOT COMPILE ❌
+
+WHY? Well... the function returns a reference, but the compiler can't tell whether that reference points to `x` or to `y`. And that matters, because a reference is only valid for as long as the thing it points to is still alive. If the compiler doesn't know which input the returned reference is tied to, it can't guarantee the reference will still be valid when you use it. So it stops you before you create a dangling reference.
+
+The fix is to add a **lifetime annotation**. This is just a label, written with an apostrophe like `'a`, that tells the compiler "these references all live for the same span". It doesn't change how long anything actually lives, it just describes the relationship so the borrow checker can verify it.
+
+```rust
+// 'a says: the return value lives as long as both x and y do
+fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
+  if x.len() > y.len() { x } else { y }
+}
+
+fn main() {
+  let word1 = String::from("Chicarito");
+  let word2 = String::from("Ogbeni");
+
+  let longest_word = longest(&word1, &word2);
+  println!("The longest word is {longest_word}"); // The longest word is Chicarito
+}
+```
+
+Now the compiler knows the returned reference won't outlive either input, and the code happily compiles. ✅
+
+### Lifetimes in structs
+
+Remember our `User` struct from earlier? If a struct holds a reference instead of an owned value, you have to give that reference a lifetime too. This tells the compiler the struct is not allowed to outlive the data it's borrowing.
+
+```rust
+// 'a means a User can't live longer than the name it points to
+struct User<'a> {
+  name: &'a str,
+}
+
+fn main() {
+  let full_name = String::from("Emma Rogers");
+
+  let user = User { name: &full_name }; // user borrows from full_name
+
+  println!("User: {}", user.name);
+} // full_name and user both drop here, so the borrow stays valid
+```
+
+Without the `'a`, the compiler would have no idea how long the borrowed `name` is supposed to be valid, and it would refuse to compile. Once you start thinking of lifetimes as just labels that describe "who has to outlive who", they stop being so scary. They were probably the hardest part of Rust for me, but honestly, once it clicks, you start to appreciate just how much the compiler is doing to keep your references safe.
