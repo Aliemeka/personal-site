@@ -986,3 +986,106 @@ fn main() {
 ```
 
 Both `shared` and `clone` point to the same vector, and either one can mutate it. The `Rc` handles shared ownership while the `RefCell` handles the mutation — exactly the combo you reach for when building things like trees or graphs where nodes need to share and update state. You can use the combination of both `RefCell` and `Rc` to represent data structures like a Patricia trie, LRU caches, or a graph with shared nodes.
+
+## Async Rust
+
+Let me be honest: **async Rust** is the part I'm least sold on. It's powerful and the ecosystem (Tokio especially) is excellent, but it still has rough edges:
+
+- Function "colouring" — async and sync code don't mix cleanly.
+- No built-in runtime; you almost always pull in Tokio or async-std.
+- Cryptic compiler errors around futures and `Pin`.
+- `Send`/`Sync` bounds that blow up across `.await` points.
+- A runtime-fragmented ecosystem.
+
+I won't go down that rabbit hole here. The good news is the foundation underneath it is great — so let's talk concurrency.
+
+### Concurrency
+
+Concurrency is just your program making progress on more than one task at a time. The neat part is that Rust's ownership rules carry straight over: the same borrow checker that stops memory bugs also stops **data races** at compile time. The Rust folks call this _fearless concurrency_.
+
+### Threads
+
+The most direct way to run things concurrently is with **threads**. A thread is an independent line of execution, and the OS can run several of them across CPU cores in parallel. You spawn one with `thread::spawn`:
+
+```rust
+use std::thread;
+
+fn main() {
+    let handle = thread::spawn(|| {
+        println!("Hello from a thread!");
+    });
+
+    handle.join().unwrap(); // wait for the thread to finish
+}
+```
+
+### Managing threads
+
+`thread::spawn` returns a `JoinHandle`. Calling `.join()` blocks until that thread finishes — without it, `main` could exit before the thread even runs. Threads don't share outside variables by default either; if a thread needs data from the outer scope, you `move` ownership into the closure (`thread::spawn(move || { ... })`).
+
+### Sharing data with `Arc`
+
+But what if several threads need the _same_ data? `Rc` won't work here — it isn't thread-safe. Its thread-safe cousin is **`Arc<T>`** (_atomically reference counted_): same idea as `Rc`, but the count is updated atomically so it's safe to share across threads. On its own, `Arc` only gives shared _immutable_ access, so to mutate shared data you pair it with a lock.
+
+### `Mutex` vs `RwLock`
+
+- **`Mutex<T>`** — one accessor at a time. Whoever holds the lock can read or write; everyone else waits.
+- **`RwLock<T>`** — many readers _or_ one writer at a time.
+
+Rule of thumb: reach for `Mutex` by default, and use `RwLock` only when reads heavily outnumber writes.
+
+```rust
+use std::sync::{Arc, Mutex};
+use std::thread;
+
+fn main() {
+    let counter = Arc::new(Mutex::new(0));
+    let mut handles = vec![];
+
+    for _ in 0..5 {
+        let counter = Arc::clone(&counter);
+        handles.push(thread::spawn(move || {
+            *counter.lock().unwrap() += 1; // lock, then mutate
+        }));
+    }
+
+    for h in handles {
+        h.join().unwrap();
+    }
+
+    println!("Result: {}", *counter.lock().unwrap()); // Result: 5
+}
+```
+
+`Arc` lets all five threads own the counter, and the `Mutex` makes sure only one increments it at a time. Swap in an `RwLock` and the API is nearly identical — just `.read()` / `.write()` instead of `.lock()`.
+
+As for when to use which: a `Mutex` is a good fit for something like a shared job queue, where every worker is both pulling tasks off and pushing results back (writes all round). An `RwLock` shines for something like an in-memory config or routing table that's read constantly but only updated once in a while.
+
+## Cargo is bae!
+
+Just like we have **pip/uv** for Python and **npm** for Javascript, Cargo is the follow-come package manager for Rust. But it is more than just a package manager. It can be used to scaffold projects, run your projects, build, run tests, format code, manage dependencies and even publish crates to [crates.io](https://crates.io). The only thing it can't do is fly.
+
+Cargo can't fly..._yet!_
+
+```bash
+>> cargo fly
+Out: cargo no fly. car go road
+```
+
+- You can start a project with `cargo init` or `cargo new`.
+- Format code with `cargo fmt` and lint it with `cargo clippy`.
+- You can run tests with `cargo test`, no need for a separate testing library.
+- You can use `cargo add` to add a package from [crates.io](https://crates.io) to your project, or just add the name to your **`Cargo.toml`** file and Cargo will install it the next time you run or build.
+- `cargo check` type-checks your code without producing a binary — much faster than a full build, and great for a tight feedback loop while coding.
+- `cargo doc --open` generates documentation from your code and comments, then opens it in the browser.
+- Ship optimised builds with `cargo build --release`.
+
+#
+
+On top of all that, the Rust developer ecosystem is also not as chaotic as that of Javascript. One toolchain manager (`rustup`), one build tool, one official formatter and one linter — there's no decision fatigue over which of five tools to glue together before you can even write code.
+
+## Are you willing to give Rust a try?
+
+I know I haven't really covered all that Rust has to offer, but this article should be enough to get you started. If you're really serious about learning Rust in all its glory, I encourage you to take a look at [the Rust Book](https://doc.rust-lang.org/book/) — it's the best resource out there for getting started. You can also get your hands dirty with [Rustlings](https://rustlings.rust-lang.org/), which is packed with exercises that build up your skills in the core areas of the language.
+
+So yeah — give Rust a shot. Yes, the borrow checker will fight you. Yes, you'll get into a few staring contests with the compiler and lose every single one at first. But here's the thing: that over-zealous compiler is the same one saving you from the 2am "why is this pointer null" debugging sessions you'd be having in other languages. Push through the first handful of `cannot borrow as mutable` tantrums, and one day it just _clicks_ — the errors start making sense, the code starts compiling, and before you know it you'll be part of the Rust degens defending the borrow checker in Twitter (X) arguments like the rest of us. Welcome to the cult. 🦀
