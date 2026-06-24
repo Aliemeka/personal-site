@@ -113,7 +113,7 @@ Gives the expected output: `Square of 5 is 25`.
 
 What is we want to change the value of `num1`. Well there are two ways that can happen
 
-We could use shadowing
+We could use _shadowing_
 
 ```rust
 // Original
@@ -141,7 +141,7 @@ The code above **WON'T COMPILE!** ❌
 
 "WHAT? But it looks correct."
 
-It does, but in Rust variables are immutable by default. That means their values can not be modified. To make `num` mutable, we have to use the `mut` keyword.
+It does, but in Rust variables are _immutable_ by default. That means their values can not be modified. To make `num` mutable, we have to use the `mut` keyword.
 
 Here it goes:
 
@@ -788,7 +788,7 @@ fn main() {
   let word1 = String::from("Chicarito");
   let word2 = String::from("Ogbeni");
 
-  let longest_word = longest(word1, word2); // 👀
+  let longest_word = longest(&word1, &word2); // 👀
   println!("The longest word is {longest_word}");
 }
 ```
@@ -836,3 +836,153 @@ fn main() {
 ```
 
 Without the `'a`, the compiler would have no idea how long the borrowed `name` is supposed to be valid, and it would refuse to compile. Once you start thinking of lifetimes as just labels that describe "who has to outlive who", they stop being so scary. They were probably the hardest part of Rust for me, but honestly, once it clicks, you start to appreciate just how much the compiler is doing to keep your references safe.
+
+## Smart Pointers
+
+Pointers are common in programming, and this is especially true in systems programming. A pointer is simply a variable that holds the location in memory of another variable. You can think of it as a **reference** to another value.
+
+Here is a quick example in C:
+
+```c
+#include <stdio.h>
+
+int main() {
+  int x = 10;
+  int *y = &x; // y holds the address of x
+
+  printf("The location of x is %p\n", (void *)y);
+  printf("The value of x is %d\n", *y);
+
+  return 0;
+}
+```
+
+`y` stores the address of `x`, and `*y` _dereferences_ that address to get the value `10` back.
+
+In Rust, we use pointers (references) very often, especially when borrowing:
+
+```rust
+fn main() {
+    let x = 10;
+    let y = &x; // y is a reference to x
+
+    println!("The location of x is {:p}", y);
+    println!("The value of x is {}", *y);
+}
+```
+
+The `&` creates a reference and `*` dereferences it, just like in C — except here the borrow checker guarantees `y` can never outlive `x` or end up pointing at freed memory.
+
+### What makes a pointer "smart"?
+
+A plain reference (`&T`) just _borrows_ a value — it points at data that someone else owns. A **smart pointer**, on the other hand, is a data structure that behaves like a pointer but also _owns_ the data it points to and carries some extra capability on top: automatically freeing memory when it goes out of scope, counting how many references exist, or enforcing the borrowing rules at runtime.
+
+In Rust, smart pointers are usually structs that implement two traits:
+
+- `Deref`, which lets you use the `*` operator and treat the smart pointer like a regular reference.
+- `Drop`, which runs cleanup code when the value goes out of scope — this is how the memory gets freed automatically.
+
+### The stack and the heap
+
+To understand why smart pointers matter, you need to know _where_ your data actually lives.
+
+- The **stack** is fast and ordered. Values are pushed and popped in a last-in-first-out manner, and every value on the stack must have a known, fixed size at compile time. Function arguments and local variables usually live here.
+- The **heap** is for data whose size isn't known at compile time, or that needs to outlive the function that created it. Allocating on the heap is slower — the allocator has to go find a free spot and hand you back a pointer to it.
+
+When you put something on the heap, the actual data lives on the heap, but the _pointer_ to it lives on the stack. Smart pointers are the tool Rust gives you to manage that heap data safely, without the manual `malloc`/`free` dance you'd do in C.
+
+### Box
+
+`Box<T>` is the simplest smart pointer. It allocates a value on the heap and keeps a pointer to it on the stack. When the `Box` goes out of scope, the heap memory is freed automatically — no manual `free()` required.
+
+```rust
+fn main() {
+    let b = Box::new(10); // 10 is stored on the heap
+    println!("b = {}", b); // Deref lets us use b like a normal value
+} // b goes out of scope here, and the heap memory is freed
+```
+
+Here `b` is a `Box<i32>`. The integer `10` lives on the heap, while `b` (the pointer) lives on the stack. Thanks to the `Deref` trait, you can use `b` almost exactly like the value it points to.
+
+`Box` really earns its keep when a type's size can't be known at compile time — the classic example being a **recursive type**. Imagine a simple linked list where each item holds a value and the next item:
+
+We could try to represent the list like this:
+
+```rust
+enum List {
+    Cons(i32, List),
+    Nil,
+}
+```
+
+The `List` enum above represents a linked list, with `Cons` holding a value plus the connection to the next item, and `Nil` signifying where the list terminates. However, this code will be **flagged** by the Rust compiler, because it can't work out how much memory a `List` needs. To size a `List`, it has to size the `List` inside it, which contains another `List`, and so on forever — the type would be infinitely large.
+
+The fix is to wrap the next item in a `Box`:
+
+```rust
+enum List {
+    Cons(i32, Box<List>),
+    Nil,
+}
+
+use List::{Cons, Nil};
+
+fn main() {
+    let list = Cons(1, Box::new(Cons(2, Box::new(Cons(3, Box::new(Nil))))));
+}
+```
+
+By wrapping the next element in a `Box`, each node only needs to store a pointer (which has a fixed, known size) instead of another whole `List`. That breaks the infinite recursion and gives `List` a definite size. The actual list data lives on the heap, and the `Box` cleans it all up when it goes out of scope. You can use `Box` to represent data structures like a Merkle tree or a binary search tree.
+
+### Reference Counter `Rc<T>`
+
+A `Box` has exactly one owner. But sometimes you need several parts of your program to share the same data, with no single one "owning" it. That's what `Rc<T>` (short for _reference counted_) is for. It keeps a count of how many references point to a value, and only frees the data when that count drops to zero.
+
+```rust
+use std::rc::Rc;
+
+fn main() {
+    let a = Rc::new(String::from("shared"));
+    let b = Rc::clone(&a); // doesn't copy the data, just bumps the count
+
+    println!("count = {}", Rc::strong_count(&a)); // count = 2
+} // both a and b drop here, count hits 0, and the String is freed
+```
+
+Here `a` and `b` both point to the same `String` on the heap. `Rc::clone` doesn't duplicate the data — it just increments the reference count, which is cheap. The count goes up to 2, and once both go out of scope it falls to 0 and the memory is cleaned up. One thing to note: `Rc<T>` is for single-threaded use only, and it only gives you shared _immutable_ access.
+
+### Mutating the Immutable with `RefCell<T>`
+
+Normally Rust enforces the borrowing rules at **compile time**: you can have many immutable borrows or one mutable borrow, never both. `RefCell<T>` moves that check to **runtime** instead. This lets you mutate data even through an immutable reference — a pattern called _interior mutability_. The catch is that if you break the rules, you get a panic at runtime instead of a compile error.
+
+```rust
+use std::cell::RefCell;
+
+fn main() {
+    let value = RefCell::new(5);
+
+    *value.borrow_mut() += 10; // mutate through an immutable binding
+
+    println!("value = {}", value.borrow()); // value = 15
+}
+```
+
+Notice `value` isn't declared `mut`, yet we still changed it. `borrow_mut()` hands you a mutable reference and `borrow()` an immutable one, and `RefCell` tracks those borrows as the program runs. Ask for a mutable borrow while another borrow is still active and it'll panic.
+
+Where this really shines is combining it with `Rc<T>`. `Rc` gives you multiple owners but only immutable access; wrap the inner value in a `RefCell` and you get **shared, mutable** data — `Rc<RefCell<T>>`, a very common pairing in Rust:
+
+```rust
+use std::cell::RefCell;
+use std::rc::Rc;
+
+fn main() {
+    let shared = Rc::new(RefCell::new(vec![1, 2, 3]));
+
+    let clone = Rc::clone(&shared);
+    clone.borrow_mut().push(4); // mutate via the second owner
+
+    println!("{:?}", shared.borrow()); // [1, 2, 3, 4]
+}
+```
+
+Both `shared` and `clone` point to the same vector, and either one can mutate it. The `Rc` handles shared ownership while the `RefCell` handles the mutation — exactly the combo you reach for when building things like trees or graphs where nodes need to share and update state. You can use the combination of both `RefCell` and `Rc` to represent data structures like a Patricia trie, LRU caches, or a graph with shared nodes.
