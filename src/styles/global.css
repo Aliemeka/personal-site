@@ -18,11 +18,22 @@
 /* Rest of your CSS */
 
 body {
-  font-family: Epilogue, sans-serif;
+  font-family: Parkinsans, sans-serif;
   word-wrap: break-word;
   overflow-wrap: break-word;
   line-height: 1.5;
   color: #444;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: Sora, sans-serif;
+  color: rgb(226 232 240);
+  font-weight: 600;
 }
 
 code {
@@ -104,6 +115,11 @@ blockquote {
 .inner-blog p > code {
   color: rgb(234, 166, 8);
   font-size: 0.9rem;
+
+  strong {
+    color: rgb(234, 166, 8);
+    font-size: 0.9rem;
+  }
 }
 
 @keyframes fade-in-up {
