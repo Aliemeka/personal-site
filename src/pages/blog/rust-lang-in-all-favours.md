@@ -15,7 +15,7 @@ tags:
 
 I started off this year with a New Year's resolution to master the [Rust programming language](https://rust-lang.org/). Let's just say it was quite a fullfilling journey, one which I'm happy and proud of myself for doing. [_Yeah! Audience cheers! Claps everywhere_].
 
-It seemed daunting at first with it's reputation as a **hard language to master** with a **very steep learning curve**. But that wasn't the case in my experience. I mean: yeah, there were some parts that were quite daunting (parts which I will discuss a lot more in later parts of this articles), but a lot of it is just building upon the knowledge of common programming concepts like variables, constants, functions, operations etc and mastering the **borrow checker**. So it wasn't that had for me to learn and get great (at least better) at it.
+It seemed daunting at first with it's reputation as a **hard language to master** with a **very steep learning curve**. But that wasn't the case in my experience. I mean: yeah, there were some parts that were quite daunting (parts which I will discuss a lot more in later parts of this articles), but a lot of it is just building upon the knowledge of common programming concepts like variables, constants, functions, operations etc and mastering the **borrow checker**. So it wasn't that hard for me to learn and get great (at least better) at it.
 
 ## How did I get learning?
 
@@ -39,7 +39,7 @@ let num: i32 = 50;
 let num2: i16 = -70;
 
 
-// Unsigned integars
+// Unsigned integars (Only positive numbers)
 let num1: u32 = 40;
 let num3: u8 = 60;
 ```
@@ -53,9 +53,9 @@ Declaring variables in C
 int32_t num = 50;
 int16_t num2 = -70;
 
-// Unsigned integers
-unsigned int32_t = 40;
-unsigned int8_t = 60;
+// Unsigned integers (Only positive numbers)
+uint32_t = 40;
+uint8_t = 60;
 ```
 
 #### Writing functions
