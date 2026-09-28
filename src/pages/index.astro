@@ -5,7 +5,7 @@ import Image from "../components/Image.astro";
 ---
 
 <MainLayout>
-  <section class='md:h-svh relative'>
+  <section class='min-h-svh flex flex-col md:block md:h-svh relative'>
     <!-- <div
       class='grid place-items-center absolute inset-0 z-0 md:overflow-hidden opacity-25 filter bg-blend-overlay blur-[1px] scale-50 md:scale-75 hue-rotate-60'
     >
@@ -65,7 +65,7 @@ import Image from "../components/Image.astro";
       </div>
     </header>
     <section
-      class='w-full flex justify-end pr-8 flex-1 items-end border-b border-collapse border-white md:border-none z-20 md:absolute md:bottom-0 md:right-0'
+      class='w-full flex justify-end pr-8 mt-auto items-end border-b border-collapse border-white md:border-none z-20 md:absolute md:bottom-0 md:right-0'
     >
       <!-- <ParticleImage
         src='/Emeka-2.png'
