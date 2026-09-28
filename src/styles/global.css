@@ -18,7 +18,7 @@
 /* Rest of your CSS */
 
 body {
-  font-family: Parkinsans, sans-serif;
+  font-family: Urbanist, sans-serif;
   word-wrap: break-word;
   overflow-wrap: break-word;
   line-height: 1.5;
@@ -31,7 +31,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: Sora, sans-serif;
+  font-family: Fraunces, sans-serif;
   color: rgb(226 232 240);
   font-weight: 600;
 }
